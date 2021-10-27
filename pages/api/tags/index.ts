@@ -9,9 +9,9 @@ export default async function handler(
   switch (req.method) {
     case "GET":
       try {
-        await connectToDatabase();
-        const tags = await Tag.find();
-        res.json(tags);
+        // await connectToDatabase();
+        // const tags = await Tag.find();
+        res.json([{ name: "test", color: "red" }]);
       } catch (err) {
         console.log(err);
         res.status(500).send("error");
