@@ -1,5 +1,5 @@
 import { createGlobalStyle } from "styled-components";
-import { text, background } from "../theme/colors";
+import { text, background } from "./theme/colors";
 
 const GlobalStyle = createGlobalStyle`
     html {

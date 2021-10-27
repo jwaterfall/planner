@@ -1,6 +1,7 @@
 import React, { FC, useState, MouseEvent } from "react";
 import useInput from "../../hooks/useInput";
 import { picker } from "../../theme/colors";
+import { v4 as uuidv4 } from "uuid";
 import {
   Container,
   Modal,
@@ -15,27 +16,30 @@ import {
   Button,
   ButtonSecondary,
 } from "../atoms/modal";
+import useCreateTag from "../../mutations/useCreateTag";
 
 type Props = { setVisibility: (visible: boolean) => void };
 
-const AddLabelModal: FC<Props> = ({ setVisibility }) => {
+const AddTagModal: FC<Props> = ({ setVisibility }) => {
   const [name, handleOnChangeName] = useInput("");
-  const [selectedColor, setSelectedColor] = useState(picker[0]);
+  const [color, setColor] = useState(picker[0]);
+  const { mutate: createTag } = useCreateTag();
 
   return (
     <Container>
       <Modal>
-        <Title>Add Collection</Title>
+        <Title>Add Tag</Title>
         <Form
           onSubmit={(e) => {
             e.preventDefault();
-            console.log(name, selectedColor);
+            createTag({ name, color });
+            setVisibility(false);
           }}
         >
           <div>
             <SectionTitle>Name</SectionTitle>
             <Input
-              placeholder="My collection"
+              placeholder="My tag"
               value={name}
               onChange={handleOnChangeName}
             />
@@ -43,12 +47,12 @@ const AddLabelModal: FC<Props> = ({ setVisibility }) => {
           <div>
             <SectionTitle>Color</SectionTitle>
             <ColorSelecter>
-              {picker.map((color) => (
+              {picker.map((c) => (
                 <ColorContainer
-                  active={selectedColor === color}
-                  onClick={() => setSelectedColor(color)}
+                  active={color === c}
+                  onClick={() => setColor(c)}
                 >
-                  <Color color={color} />
+                  <Color color={c} />
                 </ColorContainer>
               ))}
             </ColorSelecter>
@@ -70,4 +74,4 @@ const AddLabelModal: FC<Props> = ({ setVisibility }) => {
   );
 };
 
-export default AddLabelModal;
+export default AddTagModal;
