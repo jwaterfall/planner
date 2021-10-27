@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../../utils/connection";
 import Tag from "../../../models/tag";
 
-export default async function handlePosts(
+export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
