@@ -1,6 +1,7 @@
-import { useMutation, useQueryClient } from "react-query";
-import axios from "axios";
-import { Tag } from "../models/tag";
+import axios from 'axios';
+import { useMutation, useQueryClient } from 'react-query';
+
+import { Tag } from '../models/tag';
 
 interface INewTag {
   name: string;
@@ -20,10 +21,10 @@ const useCreateTag = () => {
 
   return useMutation((newTag: INewTag) => createTag(newTag), {
     onSuccess: (tag) => {
-      const previousTags = queryClient.getQueryData<Tag[]>("tags");
+      const previousTags = queryClient.getQueryData<Tag[]>('tags');
 
       if (previousTags)
-        queryClient.setQueryData("tags", [...previousTags, tag]);
+        queryClient.setQueryData('tags', [...previousTags, tag]);
     },
   });
 };

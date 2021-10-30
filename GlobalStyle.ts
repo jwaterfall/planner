@@ -21,8 +21,9 @@ const GlobalStyle = createGlobalStyle`
 
     :root {
         font-size: 16px;
-        font-family: Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+        font-family: 'Roboto', sans-serif;
         color: ${text};
+        
         @media (max-width: 1400px) {
             font-size: 16px;
         }
@@ -42,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         background: ${background};
+    }
+
+    .ReactCollapse--collapse {
+        transition: height 150ms;
     }
 `;
 

@@ -1,62 +1,132 @@
-import React, { FC, useState } from "react";
-import Link from "next/link";
-import AddTagModal from "../AddTagModal";
-import { Container, Title, NavItem, GroupIcon, TaskCount } from "./styles";
+import React, { FC, useState } from 'react';
+import { Collapse } from 'react-collapse';
+import {
+  HiDotsVertical,
+  HiOutlineCalendar,
+  HiOutlineCheck,
+  HiOutlineChevronLeft,
+  HiOutlineFolder,
+  HiOutlineHome,
+  HiOutlinePlusCircle,
+  HiOutlineTag,
+  HiOutlineTrash,
+} from 'react-icons/hi';
 
-import HomeIcon from "../../assets/icons/home.svg";
-import CalendarIcon from "../../assets/icons/calendar.svg";
-import CheckmarkIcon from "../../assets/icons/checkmark.svg";
-import TrashIcon from "../../assets/icons/trash.svg";
-import AddIcon from "../../assets/icons/add.svg";
-import useTags from "../../queries/useTags";
+import useToggle from '../../hooks/useToggle';
+import useProjects from '../../queries/useProjects';
+import useTags from '../../queries/useTags';
+import AddProjectModal from '../AddProjectModal';
+import AddTagModal from '../AddTagModal';
+import NavLink from '../NavLink';
+import {
+  AddNew,
+  Container,
+  Dropdown,
+  DropdownNavItem,
+  Margin,
+  NavItem,
+  Section,
+  TagIcon,
+} from './styles';
 
 const Sidebar: FC = () => {
-  const [modalVisibility, setModalVisibility] = useState(false);
+  const [tagModalVisibility, setTagModalVisibility] = useState(false);
+  const [projectModalVisibility, setProjectModalVisibility] = useState(false);
+  const [tagsVisibility, toggleTagsVisibility] = useToggle(true);
+  const [projectsVisibility, toggleProjectsVisibility] = useToggle(true);
   const { data: tags } = useTags();
+  const { data: projects } = useProjects();
 
   return (
-    <Container>
-      {modalVisibility && <AddTagModal setVisibility={setModalVisibility} />}
-      <Link href="/">
-        <NavItem>
-          <HomeIcon />
-          home
-          <TaskCount>24</TaskCount>
-        </NavItem>
-      </Link>
-      <Link href="/today">
-        <NavItem>
-          <CalendarIcon />
-          today
-          <TaskCount>2</TaskCount>
-        </NavItem>
-      </Link>
-      <Link href="/complete">
-        <NavItem>
-          <CheckmarkIcon />
-          complete
-        </NavItem>
-      </Link>
-      <Link href="/trash">
-        <NavItem>
-          <TrashIcon />
-          trash
-        </NavItem>
-      </Link>
-      <Title>
-        Tags
-        <AddIcon onClick={() => setModalVisibility(true)} />
-      </Title>
-      {tags?.map(({ id, name, color }) => (
-        <Link href={`/label/${id}`} key={id}>
-          <NavItem color={color}>
-            <GroupIcon color={color} />
-            {name}
-            <TaskCount>15</TaskCount>
-          </NavItem>
-        </Link>
-      ))}
-    </Container>
+    <>
+      {tagModalVisibility && (
+        <AddTagModal setVisibility={setTagModalVisibility} />
+      )}
+      {projectModalVisibility && (
+        <AddProjectModal setVisibility={setProjectModalVisibility} />
+      )}
+      <Container>
+        <Section>
+          <NavLink href="/" passHref>
+            <NavItem>
+              <HiOutlineHome />
+              Home
+            </NavItem>
+          </NavLink>
+          <NavLink href="/today" passHref>
+            <NavItem>
+              <HiOutlineCalendar />
+              Today
+            </NavItem>
+          </NavLink>
+        </Section>
+        <Section>
+          <Dropdown onClick={toggleTagsVisibility} isOpened={tagsVisibility}>
+            <HiOutlineTag />
+            Tags
+            <HiOutlineChevronLeft />
+          </Dropdown>
+          <Collapse isOpened={tagsVisibility}>
+            <Margin>
+              {tags?.map(({ _id, name, color }) => (
+                <NavLink href={`/tag/${_id}`} key={_id} passHref>
+                  <DropdownNavItem color={color}>
+                    <TagIcon color={color} />
+                    {name}
+                    <HiDotsVertical />
+                  </DropdownNavItem>
+                </NavLink>
+              ))}
+              <AddNew onClick={() => setTagModalVisibility(true)}>
+                <HiOutlinePlusCircle />
+                Add New
+              </AddNew>
+            </Margin>
+          </Collapse>
+        </Section>
+        <Section>
+          <Dropdown
+            onClick={toggleProjectsVisibility}
+            isOpened={projectsVisibility}
+          >
+            <HiOutlineFolder />
+            Projects
+            <HiOutlineChevronLeft />
+          </Dropdown>
+          <Collapse isOpened={projectsVisibility}>
+            <Margin>
+              {projects?.map(({ _id, name, color }) => (
+                <NavLink href={`/project/${_id}`} key={_id} passHref>
+                  <DropdownNavItem color={color}>
+                    <TagIcon color={color} />
+                    {name}
+                    <HiDotsVertical />
+                  </DropdownNavItem>
+                </NavLink>
+              ))}
+              <AddNew onClick={() => setProjectModalVisibility(true)}>
+                <HiOutlinePlusCircle />
+                Add New
+              </AddNew>
+            </Margin>
+          </Collapse>
+        </Section>
+        <Section>
+          <NavLink href="/completed" passHref>
+            <NavItem>
+              <HiOutlineCheck />
+              Completed
+            </NavItem>
+          </NavLink>
+          <NavLink href="/trash" passHref>
+            <NavItem>
+              <HiOutlineTrash />
+              Trash
+            </NavItem>
+          </NavLink>
+        </Section>
+      </Container>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import mongoose, { model, Schema, Document } from "mongoose";
+import mongoose, { Document, Schema, model } from 'mongoose';
 
 export interface BaseTask extends Document {
   name: string;
@@ -28,7 +28,7 @@ const taskSchema = new Schema<Task>(
     description: String,
     items: [{ item: String, completed: Boolean }],
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
-export default mongoose.models.Task || model<Task>("Task", taskSchema, "tasks");
+export default mongoose.models.Task || model<Task>('Task', taskSchema, 'tasks');

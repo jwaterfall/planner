@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 
 import useInput from '../../hooks/useInput';
-import useCreateTag from '../../mutations/useCreateTag';
+import useCreateProject from '../../mutations/useCreateProject';
 import { picker } from '../../theme/colors';
 import {
   Button,
@@ -18,25 +18,25 @@ import {
 
 type Props = { setVisibility: (visible: boolean) => void };
 
-const AddTagModal: FC<Props> = ({ setVisibility }) => {
+const AddProjectModal: FC<Props> = ({ setVisibility }) => {
   const [name, handleOnChangeName] = useInput('');
   const [color, setColor] = useState(picker[0]);
-  const { mutate: createTag } = useCreateTag();
+  const { mutate: createProject } = useCreateProject();
 
   return (
     <Container>
       <Modal>
-        <Title>Add new tag</Title>
+        <Title>Add new project</Title>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            createTag({ name, color });
+            createProject({ name, color });
             setVisibility(false);
           }}
         >
           <Input
             required
-            placeholder="Tag's name"
+            placeholder="Project's name"
             value={name}
             onChange={handleOnChangeName}
           />
@@ -68,4 +68,4 @@ const AddTagModal: FC<Props> = ({ setVisibility }) => {
   );
 };
 
-export default AddTagModal;
+export default AddProjectModal;

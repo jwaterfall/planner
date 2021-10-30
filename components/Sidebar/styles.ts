@@ -1,83 +1,120 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+
 import {
+  overlay1,
+  overlay2,
+  overlay3,
+  primary,
+  shadow,
+  sidebar,
   text,
   textSecondary,
-  accent,
-  hover,
-  sidebar,
-} from "../../theme/colors";
+} from '../../theme/colors';
+import { weight1, weight2 } from '../../theme/font';
 
 export const Container = styled.div`
   grid-area: sidebar;
   width: 17.5rem;
   padding: 1rem;
   background: ${sidebar};
-`;
-
-export const Title = styled.div`
-  padding: 0.75rem;
-  padding-top: 1.5rem;
-  font-size: 0.875rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  & > svg {
-    color: ${textSecondary};
-    width: 1.25rem;
-    height: 1.25rem;
-    cursor: pointer;
-    transition: color 150ms;
-    &:hover {
-      color: ${text};
+  box-shadow: 0 0 0.25rem ${shadow};
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: ${overlay3} transparent;
+  &::-webkit-scrollbar {
+    width: 0.9rem;
+    @media (max-width: 992px) {
+      display: none;
     }
+  }
+  &::-webkit-scrollbar-thumb {
+    cursor: pointer;
+    border-radius: 0.9rem;
+    background-color: ${overlay3};
+    border: 0.2rem solid transparent;
+    background-clip: content-box;
   }
 `;
 
-export const NavItem = styled.div<{ color: string }>`
+export const NavItem = styled.div`
+  text-decoration: none;
   padding: 0.75rem;
   min-height: 3rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  text-transform: capitalize;
-  border-radius: 0.5rem;
+  font-weight: ${weight2};
+  border-radius: 1rem;
   cursor: pointer;
-  transition: background 150ms;
-  backdrop-filter: blur(0.25rem);
+  transition: all 150ms;
   &:hover {
-    background: linear-gradient(
-      to right,
-      ${(props) => props.color || hover} -500%,
-      ${hover} 50%
-    );
+    background: ${overlay2};
   }
   & > svg {
-    color: ${text};
-    width: 1rem;
-    height: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-bottom: 0.1rem;
+  }
+  &.active {
+    color: ${primary};
   }
 `;
 
-export const GroupIcon = styled.div<{ color: string }>`
+export const DropdownNavItem = styled(NavItem)`
+  font-weight: ${weight1};
+  & > svg {
+    color: ${text};
+    opacity: 0;
+    margin-left: auto;
+    transition: opacity 150ms;
+  }
+  &:hover {
+    & > svg {
+      opacity: 1;
+      &:hover {
+        color: ${primary};
+      }
+    }
+  }
+`;
+
+export const AddNew = styled(NavItem)`
+  color: ${textSecondary};
+  &:hover {
+    color: ${text};
+  }
+`;
+
+export const Dropdown = styled(NavItem)<{ isOpened: boolean }>`
+  & > svg:not(:first-of-type) {
+    margin-left: auto;
+    width: 1.25rem;
+    height: 1.25rem;
+    transition: transform 150ms;
+    ${(props) => props.isOpened && 'transform: rotate(-90deg);'}
+  }
+  &:hover {
+    background: none;
+  }
+`;
+
+export const Section = styled.div`
+  padding: 0.5rem 0;
+  &:not(:first-child) {
+    border-top: 1px solid ${overlay1};
+  }
+`;
+
+export const Margin = styled.div`
+  margin-left: 2rem;
+`;
+
+export const TagIcon = styled.div<{ color: string }>`
   background: ${(props) => props.color};
   border-radius: 50%;
   width: 0.75rem;
   height: 0.75rem;
   margin: 0 0.125rem;
-`;
-
-export const TaskCount = styled.div`
-  background: ${accent};
-  border-radius: 0.5rem;
-  width: 1.5rem;
-  height: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-left: auto;
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: ${textSecondary};
 `;

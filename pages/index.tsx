@@ -1,5 +1,3 @@
-import Layout from "../components/Layout";
-
-const IndexPage = () => <Layout title="Home">test</Layout>;
+const IndexPage = () => <>test</>;
 
 export default IndexPage;

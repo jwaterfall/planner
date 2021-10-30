@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent, useState } from 'react';
 
 type UseInput = [string, (e: ChangeEvent<HTMLInputElement>) => void];
 

@@ -1,20 +1,24 @@
-import React from "react";
-import { AppProps } from "next/app";
-import { ThemeProvider } from "styled-components";
-import { Normalize } from "styled-normalize";
-import { QueryClient, QueryClientProvider } from "react-query";
-import { ReactQueryDevtools } from "react-query/devtools";
-import GlobalStyle from "../GlobalStyle";
+import { AppProps } from 'next/app';
+import React from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import { ThemeProvider } from 'styled-components';
+import { Normalize } from 'styled-normalize';
+
+import GlobalStyle from '../GlobalStyle';
+import Layout from '../components/Layout';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{ mode: "dark" }}>
+      <ThemeProvider theme={{ mode: 'light' }}>
         <Normalize />
         <GlobalStyle />
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

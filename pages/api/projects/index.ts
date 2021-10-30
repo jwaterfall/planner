@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import Tag from '../../../models/tag';
+import Project from '../../../models/project';
 import { connectToDatabase } from '../../../utils/connection';
 
 export default async function handler(
@@ -11,8 +11,8 @@ export default async function handler(
     case 'GET':
       try {
         await connectToDatabase();
-        const tags = await Tag.find();
-        res.json(tags);
+        const projects = await Project.find();
+        res.json(projects);
       } catch (err) {
         console.log(err);
         res.status(500).send('error');
@@ -21,9 +21,9 @@ export default async function handler(
     case 'PUT':
       try {
         await connectToDatabase();
-        const tag = new Tag(req.body);
-        await tag.save();
-        res.json(tag);
+        const project = new Project(req.body);
+        await project.save();
+        res.json(project);
       } catch (err) {
         console.log(err);
         res.status(500).send('error');
