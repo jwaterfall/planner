@@ -6,7 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 
 import GlobalStyle from '../GlobalStyle';
-import Layout from '../components/Layout';
+import Layout from '../components/templates/Layout';
 
 const queryClient = new QueryClient();
 

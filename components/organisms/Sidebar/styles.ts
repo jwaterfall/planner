@@ -9,8 +9,8 @@ import {
   sidebar,
   text,
   textSecondary,
-} from '../../theme/colors';
-import { weight1, weight2 } from '../../theme/font';
+} from '../../../theme/colors';
+import { weight1, weight2 } from '../../../theme/font';
 
 export const Container = styled.div`
   grid-area: sidebar;
@@ -111,7 +111,7 @@ export const Margin = styled.div`
   margin-left: 2rem;
 `;
 
-export const TagIcon = styled.div<{ color: string }>`
+export const ColorIcon = styled.div<{ color: string }>`
   background: ${(props) => props.color};
   border-radius: 50%;
   width: 0.75rem;

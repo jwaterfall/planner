@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { Project } from '../models/project';
 
-interface INewProject {
+interface NewProject {
   name: string;
   color: string;
 }
 
-const createProject = async (newProject: INewProject) => {
+const createProject = async (newProject: NewProject) => {
   const { origin } = window.location;
   const response = await axios.put<Project>(
     `${origin}/api/projects`,
@@ -22,7 +22,7 @@ const createProject = async (newProject: INewProject) => {
 const useCreateProject = () => {
   const queryClient = useQueryClient();
 
-  return useMutation((newProject: INewProject) => createProject(newProject), {
+  return useMutation((newProject: NewProject) => createProject(newProject), {
     onSuccess: (project) => {
       const previousProjects = queryClient.getQueryData<Project[]>('projects');
 

@@ -2,15 +2,13 @@ import styled from 'styled-components';
 
 import {
   overlay2,
-  primary,
   selection,
   shadow,
   sidebar,
   text,
-  textButton,
   textTertiary,
-} from '../../theme/colors';
-import { weight1, weight2, weight3 } from '../../theme/font';
+} from '../../../theme/colors';
+import { weight2, weight3 } from '../../../theme/font';
 
 export const Container = styled.div`
   width: 100%;
@@ -25,7 +23,7 @@ export const Container = styled.div`
   justify-content: center;
 `;
 
-export const Modal = styled.div`
+export const Content = styled.div`
   width: 25rem;
   padding: 2rem;
   border-radius: 1rem;
@@ -46,28 +44,13 @@ export const SectionTitle = styled.div`
   font-weight: ${weight2};
 `;
 
-export const Input = styled.input`
-  margin-top: 1.5rem;
-  padding: 1rem 1.5rem;
-  width: 100%;
-  font-size: 0.875rem;
-  color: ${text};
-  background: ${overlay2};
-  outline: none;
-  border: none;
-  border-radius: 1rem;
-  &::placeholder {
-    color: ${textTertiary};
-  }
-`;
-
-export const ColorSelecter = styled.div`
+export const ColorPickerContainer = styled.div`
   margin-top: 0.75rem;
   display: flex;
   justify-content: space-between;
 `;
 
-export const Color = styled.div<{ color: string; active: boolean }>`
+export const ColorPickerColor = styled.div<{ color: string; active: boolean }>`
   background: ${(props) => props.color};
   border-radius: 50%;
   width: 1.5rem;
@@ -77,28 +60,10 @@ export const Color = styled.div<{ color: string; active: boolean }>`
   border: 0.15rem solid ${(props) => (props.active ? selection : props.color)};
 `;
 
-export const ButtonContainer = styled.div`
+export const Footer = styled.div`
   margin-top: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 1rem;
-`;
-
-export const Button = styled.button`
-  background: ${primary};
-  outline: 0;
-  border: 0;
-  font-size: 0.875rem;
-  color: ${textButton};
-  padding: 0.5rem 1rem;
-  border-radius: 1rem;
-  cursor: pointer;
-  border: 0.125rem solid ${primary};
-`;
-
-export const ButtonSecondary = styled(Button)`
-  background: transparent;
-  color: ${primary};
-  font-weight: ${weight2};
 `;

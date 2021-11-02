@@ -3,12 +3,12 @@ import { useMutation, useQueryClient } from 'react-query';
 
 import { Tag } from '../models/tag';
 
-interface INewTag {
+interface NewTag {
   name: string;
   color: string;
 }
 
-const createTag = async (newTag: INewTag) => {
+const createTag = async (newTag: NewTag) => {
   const { origin } = window.location;
   const response = await axios.put<Tag>(`${origin}/api/tags`, newTag);
 
@@ -19,7 +19,7 @@ const createTag = async (newTag: INewTag) => {
 const useCreateTag = () => {
   const queryClient = useQueryClient();
 
-  return useMutation((newTag: INewTag) => createTag(newTag), {
+  return useMutation((newTag: NewTag) => createTag(newTag), {
     onSuccess: (tag) => {
       const previousTags = queryClient.getQueryData<Tag[]>('tags');
 
