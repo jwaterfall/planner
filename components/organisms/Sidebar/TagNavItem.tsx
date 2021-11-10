@@ -1,10 +1,15 @@
 import React, { FC, useState } from 'react';
-import { HiDotsVertical } from 'react-icons/hi';
+import {
+  HiDotsVertical,
+  HiOutlinePencil,
+  HiOutlineTrash,
+  HiTrash,
+} from 'react-icons/hi';
 
 import { Tag } from '../../../models/tag';
 import useDeleteTag from '../../../mutations/useDeleteTag';
 import NavLink from '../../atoms/NavLink';
-import Dropdown, { DropdownItem, DropdownMenu } from '../../molecules/Dropdown';
+import { DropdownItem, DropdownMenu } from '../../molecules/Dropdown';
 import EditTagModal from '../EditTagModal';
 import { ColorIcon, DropdownIcon, DropdownNavItem } from './styles';
 
@@ -49,7 +54,8 @@ const TagNavItem: FC<TagProps> = ({ tag }) => {
                 setEditModalVisibility(true);
               }}
             >
-              Edit
+              <HiOutlinePencil />
+              Edit tag
             </DropdownItem>
             <DropdownItem
               onClick={(e) => {
@@ -58,7 +64,8 @@ const TagNavItem: FC<TagProps> = ({ tag }) => {
                 deleteTag();
               }}
             >
-              Delete
+              <HiOutlineTrash />
+              Delete tag
             </DropdownItem>
           </DropdownMenu>
         </DropdownNavItem>

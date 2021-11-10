@@ -1,13 +1,18 @@
 import theme from 'styled-theming';
 
 export const shadow = theme('mode', {
-  light: 'hsla(0, 0%, 0%, 0.1)',
+  light: 'hsla(0, 0%, 0%, 0.25)',
   dark: 'hsla(0, 0%, 0%, 0.1)',
 });
 
 export const text = theme('mode', {
-  light: 'rgb(33, 21, 81)',
-  dark: '#dfe1e3',
+  light: '#0d0c22',
+  dark: '#ffffff',
+});
+
+export const textSelected = theme('mode', {
+  light: '#2f49d1',
+  dark: '#ffffff',
 });
 
 export const textButton = theme('mode', {
@@ -16,8 +21,8 @@ export const textButton = theme('mode', {
 });
 
 export const textSecondary = theme('mode', {
-  light: 'rgb(178, 174, 194)',
-  dark: '#a3a8ae',
+  light: '#6e6d7a',
+  dark: '#747474',
 });
 
 export const textTertiary = theme('mode', {
@@ -46,30 +51,39 @@ export const selection = theme('mode', {
 });
 
 export const background = theme('mode', {
-  light: '#F7F7FA',
-  dark: '#0f1012',
+  light: '#f8f8f8',
+  dark: '#1b1b1b',
 });
 
 export const foreground = theme('mode', {
   light: '#ffffff',
-  dark: '#151619',
+  dark: '#171717',
 });
 
 export const primary = theme('mode', {
-  light: '#643FDB',
-  dark: '#643FDB',
+  light: '#2f49d1',
+  dark: '#2f49d1',
 });
 
+// export const picker = [
+//   '#2f45c5',
+//   '#8145cd',
+//   '#cd45a2',
+//   '#ff6370',
+//   '#13cd3c',
+//   '#717171',
+// ];
+
 export const picker = [
-  '#FF5555',
   '#FF8A00',
-  '#DA9A58',
   '#F9CA28',
+  '#DA9A58',
   '#8ECF66',
   '#5AE1C3',
   '#4D9FFF',
   '#643FDB',
   '#F980BA',
-  '#AAB3BB',
+  '#FF5555',
   '#543A49',
+  '#AAB3BB',
 ];

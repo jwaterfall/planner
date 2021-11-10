@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{ mode: 'dark' }}>
+      <ThemeProvider theme={{ mode: 'light' }}>
         <Normalize />
         <GlobalStyle />
         <Layout>

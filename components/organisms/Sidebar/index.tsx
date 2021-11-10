@@ -1,7 +1,6 @@
 import React, { FC, useState } from 'react';
 import { Collapse } from 'react-collapse';
 import {
-  HiDotsVertical,
   HiOutlineCalendar,
   HiOutlineCheck,
   HiOutlineChevronLeft,

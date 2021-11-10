@@ -3,9 +3,8 @@ import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
-import { Container, Item, Menu } from './styles';
+import { Item, Menu } from './styles';
 
-export default Container;
 export const DropdownItem = Item;
 
 export interface DropdownMenuProps {

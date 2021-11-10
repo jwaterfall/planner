@@ -7,7 +7,7 @@ export const weight1 = theme('mode', {
 
 export const weight2 = theme('mode', {
   light: 600,
-  dark: 600,
+  dark: 500,
 });
 
 export const weight3 = theme('mode', {

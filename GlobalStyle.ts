@@ -1,5 +1,6 @@
-import { createGlobalStyle } from "styled-components";
-import { text, background } from "./theme/colors";
+import { createGlobalStyle } from 'styled-components';
+
+import { background, text } from './theme/colors';
 
 const GlobalStyle = createGlobalStyle`
     html {
@@ -21,7 +22,7 @@ const GlobalStyle = createGlobalStyle`
 
     :root {
         font-size: 16px;
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Poppins', sans-serif;
         color: ${text};
         
         @media (max-width: 1400px) {
