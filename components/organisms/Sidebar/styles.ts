@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 
 import {
+  foreground,
   overlay1,
   overlay2,
   overlay3,
   primary,
   shadow,
-  sidebar,
   text,
   textSecondary,
 } from '../../../theme/colors';
@@ -16,7 +16,7 @@ export const Container = styled.div`
   grid-area: sidebar;
   width: 17.5rem;
   padding: 1rem;
-  background: ${sidebar};
+  background: ${foreground};
   box-shadow: 0 0 0.25rem ${shadow};
   overflow-y: auto;
   overflow-x: hidden;
@@ -63,20 +63,26 @@ export const NavItem = styled.div`
 `;
 
 export const DropdownNavItem = styled(NavItem)`
+  position: relative;
   font-weight: ${weight1};
-  & > svg {
-    color: ${text};
-    opacity: 0;
-    margin-left: auto;
-    transition: opacity 150ms;
-  }
   &:hover {
-    & > svg {
+    & svg {
       opacity: 1;
       &:hover {
         color: ${primary};
       }
     }
+  }
+`;
+
+export const DropdownIcon = styled.div`
+  margin-left: auto;
+  & svg {
+    width: 1rem;
+    height: 1rem;
+    color: ${text};
+    opacity: 0;
+    transition: opacity 150ms;
   }
 `;
 
@@ -89,7 +95,6 @@ export const AddNew = styled(NavItem)`
 
 export const Dropdown = styled(NavItem)<{ isOpened: boolean }>`
   & > svg:not(:first-of-type) {
-    margin-left: auto;
     width: 1.25rem;
     height: 1.25rem;
     transition: transform 150ms;

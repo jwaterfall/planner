@@ -50,7 +50,7 @@ export const background = theme('mode', {
   dark: '#0f1012',
 });
 
-export const sidebar = theme('mode', {
+export const foreground = theme('mode', {
   light: '#ffffff',
   dark: '#151619',
 });

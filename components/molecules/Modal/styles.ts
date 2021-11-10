@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 import {
+  foreground,
   overlay2,
   selection,
   shadow,
-  sidebar,
   text,
   textTertiary,
 } from '../../../theme/colors';
@@ -16,7 +16,7 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 99;
+  z-index: 105;
   background: hsla(0, 0%, 0%, 0.5);
   display: flex;
   align-items: center;
@@ -27,7 +27,7 @@ export const Content = styled.div`
   width: 25rem;
   padding: 2rem;
   border-radius: 1rem;
-  background: ${sidebar};
+  background: ${foreground};
   box-shadow: 0 0 0.25rem ${shadow};
 `;
 

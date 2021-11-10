@@ -19,8 +19,19 @@ export default async function handler(
         res.status(500).send('error');
       }
       break;
+    case 'DELETE':
+      try {
+        const { id } = req.query;
+        await connectToDatabase();
+        const tag = await Tag.findByIdAndDelete(id);
+        res.json(tag);
+      } catch (err) {
+        console.log(err);
+        res.status(500).send('error');
+      }
+      break;
     default:
-      res.setHeader('Allow', ['PATCH']);
+      res.setHeader('Allow', ['PATCH', 'DELETE']);
       res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

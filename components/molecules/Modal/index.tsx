@@ -1,5 +1,6 @@
-import { FC } from 'react';
+import { FC, useRef } from 'react';
 
+import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import ColorPicker from './ColorPicker';
 import { Container, Content, Footer, Title } from './styles';
 
@@ -13,9 +14,13 @@ export interface ModalProps {
 }
 
 const Modal: FC<ModalProps> = ({ show, onHide, children }) => {
+  const ref = useRef();
+
+  useOnClickOutside(ref, onHide);
+
   return show ? (
     <Container>
-      <Content>{children}</Content>
+      <Content ref={ref}>{children}</Content>
     </Container>
   ) : (
     <></>

@@ -13,12 +13,13 @@ const queryClient = new QueryClient();
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{ mode: 'light' }}>
+      <ThemeProvider theme={{ mode: 'dark' }}>
         <Normalize />
         <GlobalStyle />
         <Layout>
           <Component {...pageProps} />
         </Layout>
+        <div id="menus" />
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

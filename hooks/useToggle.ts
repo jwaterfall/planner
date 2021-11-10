@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 type UseToggle = [boolean, () => void];
 
-const useToggle = (initialValue: boolean = false) => {
+const useToggle = (initialValue = false) => {
   const [value, setValue] = useState(initialValue);
 
   const toggleValue = () => {
