@@ -12,7 +12,9 @@ export default async function handler(
       try {
         const { id } = req.query;
         await connectToDatabase();
+
         const tag = await Tag.findByIdAndUpdate(id, req.body, { new: true });
+
         res.json(tag);
       } catch (err) {
         console.log(err);
@@ -23,7 +25,9 @@ export default async function handler(
       try {
         const { id } = req.query;
         await connectToDatabase();
+
         const tag = await Tag.findByIdAndDelete(id);
+
         res.json(tag);
       } catch (err) {
         console.log(err);

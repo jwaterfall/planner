@@ -5,15 +5,15 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 
-import GlobalStyle from '../GlobalStyle';
 import Layout from '../components/templates/Layout';
+import GlobalStyle from '../styles/GlobalStyle';
 
 const queryClient = new QueryClient();
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{ mode: 'light' }}>
+      <ThemeProvider theme={{ mode: 'dark' }}>
         <Normalize />
         <GlobalStyle />
         <Layout>

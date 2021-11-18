@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 
-import {
-  foreground,
-  overlay2,
-  selection,
-  shadow,
-  text,
-  textTertiary,
-} from '../../../theme/colors';
-import { weight2, weight3 } from '../../../theme/font';
+import { foreground, selection, shadow } from '../../../styles/theme/colors';
+import { weight2, weight3 } from '../../../styles/theme/font';
 
 export const Container = styled.div`
   width: 100%;
@@ -46,7 +39,9 @@ export const SectionTitle = styled.div`
 
 export const ColorPickerContainer = styled.div`
   margin-top: 0.75rem;
+  gap: 0.5rem;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 `;
 

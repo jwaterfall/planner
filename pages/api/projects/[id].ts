@@ -12,9 +12,11 @@ export default async function handler(
       try {
         const { id } = req.query;
         await connectToDatabase();
+
         const project = await Project.findByIdAndUpdate(id, req.body, {
           new: true,
         });
+
         res.json(project);
       } catch (err) {
         console.log(err);
@@ -25,7 +27,9 @@ export default async function handler(
       try {
         const { id } = req.query;
         await connectToDatabase();
+
         const project = await Project.findByIdAndDelete(id);
+
         res.json(project);
       } catch (err) {
         console.log(err);

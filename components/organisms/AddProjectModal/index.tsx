@@ -2,7 +2,7 @@ import { FC, FormEvent, useState } from 'react';
 
 import useInput from '../../../hooks/useInput';
 import useCreateProject from '../../../mutations/useCreateProject';
-import { picker } from '../../../theme/colors';
+import { picker } from '../../../styles/theme/colors';
 import Button from '../../atoms/Button';
 import Input from '../../atoms/Input';
 import Modal, {

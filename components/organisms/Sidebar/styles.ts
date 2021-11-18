@@ -8,8 +8,8 @@ import {
   text,
   textSecondary,
   textSelected,
-} from '../../../theme/colors';
-import { weight2 } from '../../../theme/font';
+} from '../../../styles/theme/colors';
+import { weight2 } from '../../../styles/theme/font';
 
 export const Container = styled.div`
   grid-area: sidebar;
@@ -36,6 +36,7 @@ export const Container = styled.div`
 `;
 
 export const NavItem = styled.div`
+  width: 100%;
   color: ${textSecondary};
   text-decoration: none;
   padding: 0 0.75rem;
@@ -49,7 +50,6 @@ export const NavItem = styled.div`
   cursor: pointer;
   transition: all 150ms;
   &:hover {
-    background: ${overlay2};
     color: ${text};
   }
   & > svg {
@@ -58,6 +58,7 @@ export const NavItem = styled.div`
   }
   &.active {
     color: ${textSelected};
+    background: ${overlay2};
   }
 `;
 
@@ -72,7 +73,7 @@ export const DropdownNavItem = styled(NavItem)`
   }
 `;
 
-export const DropdownIcon = styled.div`
+export const CollapsibleArrowIcon = styled.div`
   margin-left: auto;
   & svg {
     width: 1.25rem;
@@ -95,6 +96,7 @@ export const Dropdown = styled(NavItem)<{ isOpened: boolean }>`
     width: 1.25rem;
     height: 1.25rem;
     transition: transform 150ms;
+    margin-left: auto;
     ${(props) => props.isOpened && 'transform: rotate(-90deg);'}
   }
   &:hover {

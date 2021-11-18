@@ -8,19 +8,22 @@ export interface BaseTask extends Document {
   reminder?: Date;
 }
 
-export interface SimpleTask extends BaseTask {
+export interface DefaultTask extends BaseTask {
+  type: 'default';
   description: string;
 }
 
 export interface ChecklistTask extends BaseTask {
+  type: 'checklist';
   items: { item: string; completed: boolean }[];
 }
 
-export type Task = SimpleTask | ChecklistTask;
+export type Task = DefaultTask | ChecklistTask;
 
 const taskSchema = new Schema<Task>(
   {
     name: { required: true, index: true, type: String },
+    type: { required: true, type: String },
     color: { required: true, type: String },
     date: { required: true, type: Date },
     tags: { required: true, type: [String] },

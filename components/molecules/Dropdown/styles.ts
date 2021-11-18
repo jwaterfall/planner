@@ -6,8 +6,8 @@ import {
   shadow,
   text,
   textSecondary,
-} from '../../../theme/colors';
-import { weight2 } from '../../../theme/font';
+} from '../../../styles/theme/colors';
+import { weight2 } from '../../../styles/theme/font';
 
 export const Menu = styled.div`
   min-width: 15rem;

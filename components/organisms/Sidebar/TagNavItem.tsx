@@ -3,7 +3,6 @@ import {
   HiDotsVertical,
   HiOutlinePencil,
   HiOutlineTrash,
-  HiTrash,
 } from 'react-icons/hi';
 
 import { Tag } from '../../../models/tag';
@@ -11,7 +10,7 @@ import useDeleteTag from '../../../mutations/useDeleteTag';
 import NavLink from '../../atoms/NavLink';
 import { DropdownItem, DropdownMenu } from '../../molecules/Dropdown';
 import EditTagModal from '../EditTagModal';
-import { ColorIcon, DropdownIcon, DropdownNavItem } from './styles';
+import { CollapsibleArrowIcon, ColorIcon, DropdownNavItem } from './styles';
 
 interface TagProps {
   tag: Tag;
@@ -34,14 +33,14 @@ const TagNavItem: FC<TagProps> = ({ tag }) => {
         <DropdownNavItem color={tag.color}>
           <ColorIcon color={tag.color} />
           {tag.name}
-          <DropdownIcon ref={setReferenceElement}>
+          <CollapsibleArrowIcon ref={setReferenceElement}>
             <HiDotsVertical
               onClick={(e) => {
                 e.preventDefault();
                 setDropdownVisibility(true);
               }}
             />
-          </DropdownIcon>
+          </CollapsibleArrowIcon>
           <DropdownMenu
             referenceElement={referenceElement}
             show={dropdownVisivbility}

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { picker } from '../../../theme/colors';
+import { picker } from '../../../styles/theme/colors';
 import { ColorPickerColor, ColorPickerContainer, SectionTitle } from './styles';
 
 export interface ColorPickerProps {

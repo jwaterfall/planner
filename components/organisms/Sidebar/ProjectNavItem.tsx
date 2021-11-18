@@ -10,7 +10,7 @@ import useDeleteProject from '../../../mutations/useDeleteProject';
 import NavLink from '../../atoms/NavLink';
 import { DropdownItem, DropdownMenu } from '../../molecules/Dropdown';
 import EditProjectModal from '../EditProjectModal';
-import { ColorIcon, DropdownIcon, DropdownNavItem } from './styles';
+import { CollapsibleArrowIcon, ColorIcon, DropdownNavItem } from './styles';
 
 interface ProjectProps {
   project: Project;
@@ -33,14 +33,14 @@ const ProjectNavItem: FC<ProjectProps> = ({ project }) => {
         <DropdownNavItem color={project.color}>
           <ColorIcon color={project.color} />
           {project.name}
-          <DropdownIcon ref={setReferenceElement}>
+          <CollapsibleArrowIcon ref={setReferenceElement}>
             <HiDotsVertical
               onClick={(e) => {
                 e.preventDefault();
                 setDropdownVisibility(true);
               }}
             />
-          </DropdownIcon>
+          </CollapsibleArrowIcon>
           <DropdownMenu
             referenceElement={referenceElement}
             show={dropdownVisivbility}

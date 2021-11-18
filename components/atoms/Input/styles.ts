@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { overlay2, text, textTertiary } from '../../../theme/colors';
+import { overlay2, text, textTertiary } from '../../../styles/theme/colors';
 
 export const PrimaryInput = styled.input`
   margin-top: 1.5rem;

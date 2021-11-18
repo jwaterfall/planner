@@ -12,6 +12,7 @@ export default async function handler(
       try {
         await connectToDatabase();
         const projects = await Project.find();
+
         res.json(projects);
       } catch (err) {
         console.log(err);
@@ -22,6 +23,7 @@ export default async function handler(
       try {
         await connectToDatabase();
         const project = new Project(req.body);
+
         await project.save();
         res.json(project);
       } catch (err) {

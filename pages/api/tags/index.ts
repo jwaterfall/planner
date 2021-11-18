@@ -11,7 +11,9 @@ export default async function handler(
     case 'GET':
       try {
         await connectToDatabase();
+
         const tags = await Tag.find();
+
         res.json(tags);
       } catch (err) {
         console.log(err);
@@ -21,7 +23,9 @@ export default async function handler(
     case 'PUT':
       try {
         await connectToDatabase();
+
         const tag = new Tag(req.body);
+
         await tag.save();
         res.json(tag);
       } catch (err) {
