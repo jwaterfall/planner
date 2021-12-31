@@ -10,20 +10,18 @@ import GlobalStyle from '../styles/GlobalStyle';
 
 const queryClient = new QueryClient();
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{ mode: 'dark' }}>
-        <Normalize />
-        <GlobalStyle />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-        <div id="menus" />
-      </ThemeProvider>
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
-  );
-}
+const MyApp = ({ Component, pageProps }: AppProps) => (
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider theme={{ mode: 'dark' }}>
+      <Normalize />
+      <GlobalStyle />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
+      <div id="menus" />
+    </ThemeProvider>
+    <ReactQueryDevtools initialIsOpen={false} />
+  </QueryClientProvider>
+);
 
 export default MyApp;

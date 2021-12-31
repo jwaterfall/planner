@@ -31,7 +31,7 @@ const AddTagModal: FC<ModalProps> = ({ show, onHide }) => {
       <form onSubmit={handleSubmit}>
         <Input
           required
-          placeholder="Tag's name"
+          placeholder="Name"
           value={name}
           onChange={handleOnChangeName}
         />

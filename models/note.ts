@@ -1,28 +1,30 @@
 import mongoose, { Document, Schema, model } from 'mongoose';
 
-export interface BaseTask extends Document {
-  name: string;
+export interface BaseNote extends Document {
+  title: string;
   color: string;
   date: Date;
   tags: string[];
   reminder?: Date;
+  tag?: string;
+  project?: string;
 }
 
-export interface DefaultTask extends BaseTask {
+export interface DefaultNote extends BaseNote {
   type: 'default';
   description: string;
 }
 
-export interface ChecklistTask extends BaseTask {
+export interface ChecklistNote extends BaseNote {
   type: 'checklist';
   items: { item: string; completed: boolean }[];
 }
 
-export type Task = DefaultTask | ChecklistTask;
+export type Note = DefaultNote | ChecklistNote;
 
-const taskSchema = new Schema<Task>(
+const noteSchema = new Schema<Note>(
   {
-    name: { required: true, index: true, type: String },
+    title: { required: true, index: true, type: String },
     type: { required: true, type: String },
     color: { required: true, type: String },
     date: { required: true, type: Date },
@@ -34,4 +36,4 @@ const taskSchema = new Schema<Task>(
   { versionKey: false },
 );
 
-export default mongoose.models.Task || model<Task>('Task', taskSchema, 'tasks');
+export default mongoose.models.Note || model<Note>('Note', noteSchema, 'notes');

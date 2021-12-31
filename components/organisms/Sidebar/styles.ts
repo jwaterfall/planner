@@ -8,6 +8,7 @@ import {
   text,
   textSecondary,
   textSelected,
+  textTertiary,
 } from '../../../styles/theme/colors';
 import { weight2 } from '../../../styles/theme/font';
 
@@ -85,13 +86,13 @@ export const CollapsibleArrowIcon = styled.div`
 `;
 
 export const AddNew = styled(NavItem)`
-  color: ${textSecondary};
+  color: ${textTertiary};
   &:hover {
-    color: ${text};
+    color: ${textSecondary};
   }
 `;
 
-export const Dropdown = styled(NavItem)<{ isOpened: boolean }>`
+export const CollapsibleMenu = styled(NavItem)<{ isOpened: boolean }>`
   & > svg:not(:first-of-type) {
     width: 1.25rem;
     height: 1.25rem;

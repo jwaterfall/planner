@@ -2,7 +2,7 @@ import theme from 'styled-theming';
 
 export const shadow = theme('mode', {
   light: 'hsla(0, 0%, 0%, 0.25)',
-  dark: 'hsla(0, 0%, 0%, 0.1)',
+  dark: 'hsla(0, 0%, 0%, 0.25)',
 });
 
 export const text = theme('mode', {
@@ -11,7 +11,7 @@ export const text = theme('mode', {
 });
 
 export const textSelected = theme('mode', {
-  light: '#2f49d1',
+  light: '#643FDB',
   dark: '#ffffff',
 });
 
@@ -26,8 +26,18 @@ export const textSecondary = theme('mode', {
 });
 
 export const textTertiary = theme('mode', {
-  light: '#757575',
+  light: '#a09fa9',
   dark: '#4e5359',
+});
+
+export const cardTextSecondary = theme('mode', {
+  light: 'hsl(0, 0%, 100%)',
+  dark: 'hsl(0, 0%, 100%)',
+});
+
+export const cardText = theme('mode', {
+  light: 'hsla(0, 0%, 100%, 0.75)',
+  dark: 'hsla(0, 0%, 100%, 0.75)',
 });
 
 export const overlay1 = theme('mode', {
@@ -61,8 +71,8 @@ export const foreground = theme('mode', {
 });
 
 export const primary = theme('mode', {
-  light: '#2f49d1',
-  dark: '#2f49d1',
+  light: '#643FDB',
+  dark: '#643FDB',
 });
 
 // export const picker = [

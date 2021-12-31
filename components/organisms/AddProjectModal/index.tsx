@@ -31,7 +31,7 @@ const AddProjectModal: FC<ModalProps> = ({ show, onHide }) => {
       <form onSubmit={handleSubmit}>
         <Input
           required
-          placeholder="Project's name"
+          placeholder="Name"
           value={name}
           onChange={handleOnChangeName}
         />

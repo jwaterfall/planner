@@ -15,7 +15,7 @@ export const Menu = styled.div`
   background: ${foreground};
   padding: 1rem;
   border-radius: 0.5rem;
-  box-shadow: 0 0 0.25rem ${shadow};
+  box-shadow: 0 0 0.5rem ${shadow};
 `;
 
 export const Item = styled.div`

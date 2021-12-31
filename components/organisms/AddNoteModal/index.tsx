@@ -1,10 +1,11 @@
 import { FC, FormEvent, useEffect, useState } from 'react';
 
 import useInput from '../../../hooks/useInput';
-import { Tag } from '../../../models/tag';
-import useEditTag from '../../../mutations/useEditTag';
+import { DefaultNote } from '../../../models/note';
+import useEditNote from '../../../mutations/useEditNote';
 import Button from '../../atoms/Button';
 import Input from '../../atoms/Input';
+import TextArea from '../../atoms/TextArea';
 import Modal, {
   ModalColorPicker,
   ModalFooter,
@@ -13,34 +14,42 @@ import Modal, {
 } from '../../molecules/Modal';
 
 interface Props extends ModalProps {
-  tag?: Tag;
+  note?: DefaultNote;
 }
 
-const EditTagModal: FC<Props> = ({ show, onHide, tag }) => {
-  const [name, handleOnChangeName, setName] = useInput('');
+const EditNoteModal: FC<Props> = ({ show, onHide, note }) => {
+  const [title, handleOnChangeTitle, setTitle] = useInput('');
+  const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState('');
-  const { mutate: editTag } = useEditTag(tag?._id);
+  const { mutate: editNote } = useEditNote(note?._id);
 
   useEffect(() => {
-    setName(tag?.name);
-    setColor(tag?.color);
-  }, [tag, setName, setColor]);
+    setTitle(note?.title);
+    setDescription(note?.description);
+    setColor(note?.color);
+  }, [note, setTitle, setDescription, setColor]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    editTag({ name, color });
+    editNote({ title, description, color });
     onHide();
   };
 
   return (
     <Modal show={show} onHide={onHide}>
-      <ModalTitle>Edit existing tag</ModalTitle>
+      <ModalTitle>Edit existing note</ModalTitle>
       <form onSubmit={handleSubmit}>
         <Input
           required
           placeholder="Name"
-          value={name}
-          onChange={handleOnChangeName}
+          value={title}
+          onChange={handleOnChangeTitle}
+        />
+        <TextArea
+          required
+          placeholder="Description"
+          value={description}
+          onChange={handleOnChangeDescription}
         />
         <ModalColorPicker value={color} onChange={setColor} />
         <ModalFooter>
@@ -54,4 +63,4 @@ const EditTagModal: FC<Props> = ({ show, onHide, tag }) => {
   );
 };
 
-export default EditTagModal;
+export default EditNoteModal;

@@ -1,3 +1,3 @@
-const TodayPage = () => <>toay</>;
+const TodayPage = () => <>today</>;
 
 export default TodayPage;

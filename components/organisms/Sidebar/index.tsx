@@ -2,7 +2,6 @@ import React, { FC, useState } from 'react';
 import { Collapse } from 'react-collapse';
 import {
   HiOutlineCalendar,
-  HiOutlineCheck,
   HiOutlineChevronLeft,
   HiOutlineFolder,
   HiOutlineHome,
@@ -21,8 +20,8 @@ import ProjectNavItem from './ProjectNavItem';
 import TagNavItem from './TagNavItem';
 import {
   AddNew,
+  CollapsibleMenu,
   Container,
-  Dropdown,
   Margin,
   NavItem,
   Section,
@@ -32,7 +31,7 @@ const Sidebar: FC = () => {
   const [tagModalVisibility, setTagModalVisibility] = useState(false);
   const [projectModalVisibility, setProjectModalVisibility] = useState(false);
   const [tagsVisibility, toggleTagsVisibility] = useToggle(true);
-  const [projectsVisibility, toggleProjectsVisibility] = useToggle(true);
+  const [projectsVisibility, toggleProjectsVisibility] = useToggle(false);
 
   const { data: tags } = useTags();
   const { data: projects } = useProjects();
@@ -63,11 +62,14 @@ const Sidebar: FC = () => {
           </NavLink>
         </Section>
         <Section>
-          <Dropdown onClick={toggleTagsVisibility} isOpened={tagsVisibility}>
+          <CollapsibleMenu
+            onClick={toggleTagsVisibility}
+            isOpened={tagsVisibility}
+          >
             <HiOutlineTag />
             Tags
             <HiOutlineChevronLeft />
-          </Dropdown>
+          </CollapsibleMenu>
           <Collapse isOpened={tagsVisibility}>
             <Margin>
               {tags?.map((tag) => (
@@ -81,14 +83,14 @@ const Sidebar: FC = () => {
           </Collapse>
         </Section>
         <Section>
-          <Dropdown
+          <CollapsibleMenu
             onClick={toggleProjectsVisibility}
             isOpened={projectsVisibility}
           >
             <HiOutlineFolder />
             Projects
             <HiOutlineChevronLeft />
-          </Dropdown>
+          </CollapsibleMenu>
           <Collapse isOpened={projectsVisibility}>
             <Margin>
               {projects?.map((project) => (
@@ -102,12 +104,6 @@ const Sidebar: FC = () => {
           </Collapse>
         </Section>
         <Section>
-          <NavLink href="/completed" passHref>
-            <NavItem>
-              <HiOutlineCheck />
-              Completed
-            </NavItem>
-          </NavLink>
           <NavLink href="/trash" passHref>
             <NavItem>
               <HiOutlineTrash />

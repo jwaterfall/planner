@@ -1,15 +1,13 @@
 import { ChangeEvent, useState } from 'react';
 
-type UseInput = [
-  string,
-  (e: ChangeEvent<HTMLInputElement>) => void,
-  (newValue: string) => void,
-];
+type Event = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>;
+
+type UseInput = [string, (e: Event) => void, (newValue: string) => void];
 
 const useInput = (initialValue: string) => {
   const [value, setValue] = useState(initialValue);
 
-  const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = (e: Event) => {
     setValue(e.target.value);
   };
 
