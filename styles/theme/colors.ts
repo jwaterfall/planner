@@ -75,30 +75,10 @@ export const primary = theme('mode', {
   dark: '#643FDB',
 });
 
-// export const picker = [
-//   '#F5815C',
-//   '#FBE114',
-//   '#4BEED1',
-//   '#13D3FB',
-//   '#148CFB',
-//   '#B6ADFF',
-//   '#A949C1',
-//   '#FB1467',
-// ];
-
-// export const picker = [
-//   '#FF8A00',
-//   '#F9CA28',
-//   '#DA9A58',
-//   '#8ECF66',
-//   '#5AE1C3',
-//   '#4D9FFF',
-//   '#643FDB',
-//   '#F980BA',
-//   '#FF5555',
-//   '#543A49',
-//   '#AAB3BB',
-// ];
+export const primaryHover = theme('mode', {
+  light: '#5128d5',
+  dark: '#5128d5',
+});
 
 export const picker = [
   'rgb(184, 37, 95)',

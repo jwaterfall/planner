@@ -24,7 +24,8 @@ export default async function handler(
       try {
         await connectToDatabase();
 
-        const note = new Note(req.body);
+        const date = new Date();
+        const note = new Note({ ...req.body, date });
 
         await note.save();
         res.json(note);

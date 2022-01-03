@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import Sidebar from '../../organisms/Sidebar';
+import Sidebar from '../../modules/Sidebar';
 import { Container, Page } from './styles';
 
 const Layout: FC = ({ children }) => (
