@@ -46,7 +46,7 @@ export const overlay1 = theme('mode', {
 });
 
 export const overlay2 = theme('mode', {
-  light: '#00000015',
+  light: '#00000020',
   dark: '#ffffff05',
 });
 
@@ -61,7 +61,7 @@ export const selection = theme('mode', {
 });
 
 export const background = theme('mode', {
-  light: '#f8f8f8',
+  light: '#ebebeb',
   dark: '#1b1b1b',
 });
 
