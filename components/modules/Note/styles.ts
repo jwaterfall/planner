@@ -1,42 +1,62 @@
 import styled from 'styled-components';
 
-import { cardText, cardTextSecondary } from '../../../styles/theme/colors';
-import { weight2 } from '../../../styles/theme/font';
+import {
+  foreground,
+  primary,
+  primaryHover,
+  shadow,
+  text,
+  textSecondary,
+} from '../../../styles/theme/colors';
 
 export const Toolbar = styled.div`
   opacity: 0;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  transition: opacity 150ms;
+  transition: opacity 250ms;
   & > svg {
     width: 1.25rem;
     height: 1.25rem;
     cursor: pointer;
-    color: ${cardText};
+    color: ${primary};
+    transition: color 150ms;
     &:hover {
-      color: ${cardTextSecondary};
+      color: ${primaryHover};
     }
   }
 `;
 
 export const Card = styled.div<{ color: string }>`
-  padding: 1rem;
-  border-radius: 1rem;
-  background-color: ${(props) => props.color};
+  padding: 1.5rem;
+  border-radius: 0.5rem;
+  background-color: ${foreground};
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  color: ${cardText};
+  color: ${textSecondary};
   font-size: 0.875rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 0.5rem ${shadow};
   &:hover {
     & ${Toolbar} {
       opacity: 1;
     }
   }
+  &:before {
+    background: ${(props) => props.color};
+    width: 0.2rem;
+    height: 70%;
+    position: absolute;
+    top: 15%;
+    left: 0;
+    content: '';
+    background: linear-gradient(transparent, ${(props) => props.color} 25% 75%, transparent);
+  }
 `;
 
-export const Body = styled.div<{ color: string }>`
+export const Body = styled.div`
   max-height: 25rem;
   white-space: pre-wrap;
   word-wrap: break-word;
@@ -51,13 +71,13 @@ export const Body = styled.div<{ color: string }>`
     position: absolute;
     left: 0;
     top: 0;
-    background: linear-gradient(transparent 22rem, ${(props) => props.color});
+    background: linear-gradient(transparent 20rem, ${foreground});
   }
 `;
 
-export const Title = styled.h4`
-  color: ${cardTextSecondary};
+export const Title = styled.h3`
+  color: ${text};
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-weight: 500;
 `;

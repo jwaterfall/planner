@@ -3,14 +3,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Project from '../../../models/project';
 import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { id } = req.query;
+
   switch (req.method) {
     case 'PATCH':
       try {
-        const { id } = req.query;
         await connectToDatabase();
 
         const project = await Project.findByIdAndUpdate(id, req.body, {
@@ -25,7 +23,6 @@ export default async function handler(
       break;
     case 'DELETE':
       try {
-        const { id } = req.query;
         await connectToDatabase();
 
         const project = await Project.findByIdAndDelete(id);

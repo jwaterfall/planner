@@ -25,7 +25,7 @@ const NoteComponent: FC<NoteProps> = ({ note }) => {
           />
           <Card color={note.color}>
             {note.title && <Title>{note.title}</Title>}
-            <Body color={note.color}>{note.description}</Body>
+            <Body>{note.description}</Body>
             <Toolbar>
               <HiOutlinePencil onClick={() => setModalVisibility(true)} />
               <HiOutlineTrash onClick={() => deleteNote()} />

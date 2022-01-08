@@ -3,10 +3,7 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Note from '../../../models/note';
 import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {

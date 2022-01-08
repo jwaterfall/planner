@@ -1,4 +1,4 @@
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 
 import useCreateNote from '../../../hooks/mutations/useCreateNote';
 import useInput from '../../../hooks/useInput';
@@ -32,12 +32,7 @@ const AddNoteModal: FC<ModalProps> = ({ show, onHide }) => {
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Add new note</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input
-          required
-          placeholder="Name"
-          value={title}
-          onChange={handleOnChangeTitle}
-        />
+        <Input required placeholder="Name" value={title} onChange={handleOnChangeTitle} />
         <TextArea
           required
           placeholder="Description"

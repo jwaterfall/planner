@@ -7,11 +7,14 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const Button: FC<ButtonProps> = ({ variant = 'primary', ...props }) => {
-  if (variant === 'primary') return <PrimaryButton {...props} />;
-
-  if (variant === 'secondary') return <SecondaryButton {...props} />;
-
-  return <></>;
+  switch (variant) {
+    case 'primary':
+      return <PrimaryButton {...props} />;
+    case 'secondary':
+      return <SecondaryButton {...props} />;
+    default:
+      return <></>;
+  }
 };
 
 export default Button;

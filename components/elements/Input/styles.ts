@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { overlay2, text, textTertiary } from '../../../styles/theme/colors';
+import { overlay2, shadow, text, textTertiary } from '../../../styles/theme/colors';
 
 export const PrimaryInput = styled.input`
   margin-top: 1.5rem;
@@ -11,7 +11,8 @@ export const PrimaryInput = styled.input`
   background: ${overlay2};
   outline: none;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0.5rem ${shadow};
   &::placeholder {
     color: ${textTertiary};
   }

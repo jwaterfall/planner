@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 
-import {
-  overlay2,
-  overlay3,
-  text,
-  textTertiary,
-} from '../../../styles/theme/colors';
+import { overlay2, overlay3, shadow, text, textTertiary } from '../../../styles/theme/colors';
 
 export const PrimaryTextArea = styled.textarea`
   margin-top: 1.5rem;
@@ -17,8 +12,9 @@ export const PrimaryTextArea = styled.textarea`
   background: ${overlay2};
   outline: none;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   resize: none;
+  box-shadow: 0 0 0.5rem ${shadow};
   &::placeholder {
     color: ${textTertiary};
   }

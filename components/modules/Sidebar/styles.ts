@@ -5,6 +5,7 @@ import {
   overlay1,
   overlay2,
   overlay3,
+  primary,
   text,
   textSecondary,
   textSelected,
@@ -47,7 +48,7 @@ export const NavItem = styled.div`
   gap: 0.5rem;
   font-size: 0.875rem;
   font-weight: ${weight2};
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   cursor: pointer;
   transition: all 150ms;
   &:hover {
@@ -117,9 +118,9 @@ export const Margin = styled.div`
 `;
 
 export const ColorIcon = styled.div<{ color: string }>`
-  background: ${(props) => props.color};
-  border-radius: 50%;
-  width: 0.75rem;
-  height: 0.75rem;
-  margin: 0 0.125rem;
+  border: 0.2rem solid ${(props) => props.color};
+  border-radius: 0.3rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin: 0.325rem;
 `;

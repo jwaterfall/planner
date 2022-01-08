@@ -22,22 +22,12 @@ export const textButton = theme('mode', {
 
 export const textSecondary = theme('mode', {
   light: '#6e6d7a',
-  dark: '#747474',
+  dark: '#ababab',
 });
 
 export const textTertiary = theme('mode', {
   light: '#a09fa9',
   dark: '#4e5359',
-});
-
-export const cardTextSecondary = theme('mode', {
-  light: 'hsl(0, 0%, 100%)',
-  dark: 'hsl(0, 0%, 100%)',
-});
-
-export const cardText = theme('mode', {
-  light: 'hsla(0, 0%, 100%, 0.75)',
-  dark: 'hsla(0, 0%, 100%, 0.75)',
 });
 
 export const overlay1 = theme('mode', {
@@ -62,22 +52,22 @@ export const selection = theme('mode', {
 
 export const background = theme('mode', {
   light: '#ebebeb',
-  dark: '#1b1b1b',
+  dark: '#1b1b1f',
 });
 
 export const foreground = theme('mode', {
   light: '#ffffff',
-  dark: '#171717',
+  dark: '#111215',
 });
 
 export const primary = theme('mode', {
-  light: '#643FDB',
-  dark: '#643FDB',
+  light: '#ec368d',
+  dark: '#ec368d',
 });
 
 export const primaryHover = theme('mode', {
-  light: '#5128d5',
-  dark: '#5128d5',
+  light: '#c61268',
+  dark: '#c61268',
 });
 
 export const picker = [

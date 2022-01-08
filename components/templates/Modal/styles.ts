@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { foreground, selection, shadow } from '../../../styles/theme/colors';
+import { foreground, overlay2, primary, selection, shadow } from '../../../styles/theme/colors';
 import { weight2, weight3 } from '../../../styles/theme/font';
 
 export const Container = styled.div`
@@ -19,9 +19,9 @@ export const Container = styled.div`
 export const Content = styled.div`
   width: 25rem;
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   background: ${foreground};
-  box-shadow: 0 0 0.25rem ${shadow};
+  box-shadow: 0 0 1rem 0.5rem ${shadow};
 `;
 
 export const Title = styled.div`
@@ -43,13 +43,17 @@ export const ColorPickerContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 0.5rem ${shadow};
+  background: ${overlay2};
+  border-radius: 0.5rem;
 `;
 
 export const ColorPickerColor = styled.div<{ color: string; active: boolean }>`
   background: ${(props) => props.color};
   border-radius: 50%;
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.25rem;
+  height: 1.25rem;
   cursor: pointer;
   transition: border-color 150ms;
   border: 0.15rem solid ${(props) => (props.active ? selection : props.color)};
