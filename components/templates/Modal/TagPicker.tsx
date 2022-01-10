@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 import useTags from '../../../hooks/queries/useTags';
 import Radial from '../../elements/Radial';
-import { SectionTitle, TagPickerContainer, TagPickerRadial, TagPickerTag } from './styles';
+import { SectionTitle, TagPickerContainer, TagPickerTag } from './styles';
 
 export interface TagPickerProps {
   tags: string[];
