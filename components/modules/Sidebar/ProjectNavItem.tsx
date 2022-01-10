@@ -25,8 +25,8 @@ const ProjectNavItem: FC<ProjectProps> = ({ project }) => {
         onHide={() => setEditModalVisibility(false)}
         project={project}
       />
-      <NavLink href={`/projects/${project._id}`} key={project._id} passHref>
-        <DropdownNavItem color={project.color}>
+      <NavLink href={`/projects/${project._id}`} key={project._id}>
+        <DropdownNavItem>
           <ColorIcon color={project.color} />
           {project.name}
           <CollapsibleArrowIcon ref={setReferenceElement}>

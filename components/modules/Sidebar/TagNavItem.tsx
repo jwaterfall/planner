@@ -25,8 +25,8 @@ const TagNavItem: FC<TagProps> = ({ tag }) => {
         onHide={() => setEditModalVisibility(false)}
         tag={tag}
       />
-      <NavLink href={`/tags/${tag._id}`} key={tag._id} passHref>
-        <DropdownNavItem color={tag.color}>
+      <NavLink href={`/tags/${tag._id}`} key={tag._id}>
+        <DropdownNavItem>
           <ColorIcon color={tag.color} />
           {tag.name}
           <CollapsibleArrowIcon ref={setReferenceElement}>

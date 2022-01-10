@@ -7,11 +7,11 @@ export interface NavLinkProps extends LinkProps {
 }
 
 const NavLink: FC<NavLinkProps> = ({ children, href, ...props }) => {
-  const router = useRouter();
+  const { asPath } = useRouter();
 
   return (
     <Link href={href} {...props}>
-      {router.pathname === href
+      {asPath === href
         ? cloneElement(children, {
             className: `${children.props.className || ''}active`,
           })

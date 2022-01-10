@@ -38,13 +38,13 @@ const Sidebar: FC = () => {
       />
       <Container>
         <Section>
-          <NavLink href="/" passHref>
+          <NavLink href="/">
             <NavItem>
               <HiOutlineHome />
               Home
             </NavItem>
           </NavLink>
-          <NavLink href="/today" passHref>
+          <NavLink href="/today">
             <NavItem>
               <HiOutlineCalendar />
               Today

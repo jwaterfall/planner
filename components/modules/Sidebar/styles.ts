@@ -37,7 +37,7 @@ export const Container = styled.div`
   }
 `;
 
-export const NavItem = styled.div`
+export const NavItem = styled.a`
   width: 100%;
   color: ${textSecondary};
   text-decoration: none;
