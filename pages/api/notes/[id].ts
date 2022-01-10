@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await connectToDatabase();
 
-        const note = await Note.findByIdAndUpdate(id, req.body, { new: true });
+        const note = await Note.findByIdAndUpdate(id, req.body, { new: true }).populate('tags');
 
         res.json(note);
       } catch (err) {
@@ -23,7 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await connectToDatabase();
 
-        const note = await Note.findByIdAndDelete(id);
+        const note = await Note.findByIdAndDelete(id).populate('tags');
 
         res.json(note);
       } catch (err) {

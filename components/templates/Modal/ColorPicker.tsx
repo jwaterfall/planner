@@ -4,25 +4,25 @@ import { picker } from '../../../styles/theme/colors';
 import { ColorPickerColor, ColorPickerContainer, SectionTitle } from './styles';
 
 export interface ColorPickerProps {
-  value: string;
-  onChange: (newValue: string) => void;
+  color: string;
+  setColor: (newValue: string) => void;
 }
 
-const ColorPicker: FC<ColorPickerProps> = ({ value, onChange }) => {
+const ColorPicker: FC<ColorPickerProps> = ({ color, setColor }) => {
   return (
-    <>
+    <div>
       <SectionTitle>Color</SectionTitle>
       <ColorPickerContainer>
         {picker.map((c, index) => (
           <ColorPickerColor
             key={index}
             color={c}
-            active={value === c}
-            onClick={() => onChange(c)}
+            active={color === c}
+            onClick={() => setColor(c)}
           />
         ))}
       </ColorPickerContainer>
-    </>
+    </div>
   );
 };
 

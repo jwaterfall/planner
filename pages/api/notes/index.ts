@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await connectToDatabase();
 
-        const notes = await Note.find();
+        const notes = await Note.find().populate('tags');
 
         res.json(notes);
       } catch (err) {
@@ -23,6 +23,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         const date = new Date();
         const note = new Note({ ...req.body, date });
+        await Note.populate(note, 'tags');
 
         await note.save();
         res.json(note);

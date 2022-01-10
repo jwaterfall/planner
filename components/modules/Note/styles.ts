@@ -39,20 +39,11 @@ export const Card = styled.div<{ color: string }>`
   position: relative;
   overflow: hidden;
   box-shadow: 0 0 0.5rem ${shadow};
+  border: 0.15rem solid ${(props) => props.color};
   &:hover {
     & ${Toolbar} {
       opacity: 1;
     }
-  }
-  &:before {
-    background: ${(props) => props.color};
-    width: 0.2rem;
-    height: 70%;
-    position: absolute;
-    top: 15%;
-    left: 0;
-    content: '';
-    background: linear-gradient(transparent, ${(props) => props.color} 25% 75%, transparent);
   }
 `;
 
@@ -80,4 +71,32 @@ export const Title = styled.h3`
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
+`;
+
+export const Tags = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  position: relative;
+  &:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: linear-gradient(90deg, transparent 80%, ${foreground});
+  }
+`;
+
+export const Tag = styled.div<{ color: string }>`
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: ${text};
+  padding: 0.5rem;
+  border: 0.15rem solid ${(props) => props.color};
+  border-radius: 0.5rem;
+  white-space: nowrap;
 `;

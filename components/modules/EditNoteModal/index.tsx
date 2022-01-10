@@ -11,6 +11,7 @@ import Modal, {
   ModalColorPicker,
   ModalFooter,
   ModalProps,
+  ModalTagPicker,
   ModalTitle,
 } from '../../templates/Modal';
 
@@ -22,17 +23,19 @@ const EditNoteModal: FC<Props> = ({ show, onHide, note }) => {
   const [title, handleOnChangeTitle, setTitle] = useInput('');
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
+  const [tags, setTags] = useState<string[]>([]);
   const { mutate: editNote } = useEditNote(note?._id);
 
   useEffect(() => {
     setTitle(note?.title);
     setDescription(note?.description);
     setColor(note?.color);
+    setTags(note?.tags.map((tag) => tag._id));
   }, [note, setTitle, setDescription, setColor]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    editNote({ title, description, color });
+    editNote({ title, description, color, tags });
     onHide();
   };
 
@@ -40,19 +43,15 @@ const EditNoteModal: FC<Props> = ({ show, onHide, note }) => {
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing note</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input
-          required
-          placeholder="Name"
-          value={title}
-          onChange={handleOnChangeTitle}
-        />
+        <Input required placeholder="Name" value={title} onChange={handleOnChangeTitle} />
         <TextArea
           required
           placeholder="Description"
           value={description}
           onChange={handleOnChangeDescription}
         />
-        <ModalColorPicker value={color} onChange={setColor} />
+        <ModalColorPicker color={color} setColor={setColor} />
+        <ModalTagPicker tags={tags} setTags={setTags} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>
             Cancel

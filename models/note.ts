@@ -1,12 +1,13 @@
 import mongoose, { Document, Schema, model } from 'mongoose';
 
+import { Tag } from './tag';
+
 export interface BaseNote extends Document {
   title: string;
   color: string;
   date: Date;
-  tags: string[];
+  tags: Tag[];
   reminder?: Date;
-  tag?: string;
   project?: string;
 }
 
@@ -28,8 +29,9 @@ const noteSchema = new Schema<Note>(
     type: { required: true, type: String },
     color: { required: true, type: String },
     date: { required: true, type: Date },
-    tags: { required: true, type: [String] },
+    tags: { required: true, type: [Schema.Types.ObjectId], ref: 'Tag' },
     reminder: Date,
+    project: String,
     description: String,
     items: [{ item: String, completed: Boolean }],
   },

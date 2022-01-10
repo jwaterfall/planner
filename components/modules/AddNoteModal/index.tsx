@@ -10,6 +10,7 @@ import Modal, {
   ModalColorPicker,
   ModalFooter,
   ModalProps,
+  ModalTagPicker,
   ModalTitle,
 } from '../../templates/Modal';
 
@@ -17,14 +18,16 @@ const AddNoteModal: FC<ModalProps> = ({ show, onHide }) => {
   const [title, handleOnChangeTitle, setTitle] = useInput('');
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
+  const [tags, setTags] = useState<string[]>([]);
   const { mutate: createNote } = useCreateNote();
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createNote({ title, description, color, type: 'default', tags: [] });
+    createNote({ title, description, color, type: 'default', tags });
     setTitle('');
     setDescription('');
     setColor(picker[0]);
+    setTags([]);
     onHide();
   };
 
@@ -39,7 +42,8 @@ const AddNoteModal: FC<ModalProps> = ({ show, onHide }) => {
           value={description}
           onChange={handleOnChangeDescription}
         />
-        <ModalColorPicker value={color} onChange={setColor} />
+        <ModalColorPicker color={color} setColor={setColor} />
+        <ModalTagPicker tags={tags} setTags={setTags} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>
             Cancel

@@ -4,7 +4,7 @@ import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 import useDeleteNote from '../../../hooks/mutations/useDeleteNote';
 import { Note } from '../../../models/note';
 import EditNoteModal from '../../modules/EditNoteModal';
-import { Body, Card, Title, Toolbar } from './styles';
+import { Body, Card, Tag, Tags, Title, Toolbar } from './styles';
 
 export interface NoteProps {
   note: Note;
@@ -26,6 +26,15 @@ const NoteComponent: FC<NoteProps> = ({ note }) => {
           <Card color={note.color}>
             {note.title && <Title>{note.title}</Title>}
             <Body>{note.description}</Body>
+            {note.tags.length > 0 && (
+              <Tags>
+                {note.tags.map((tag) => (
+                  <Tag key={tag._id} color={tag.color}>
+                    {tag.name}
+                  </Tag>
+                ))}
+              </Tags>
+            )}
             <Toolbar>
               <HiOutlinePencil onClick={() => setModalVisibility(true)} />
               <HiOutlineTrash onClick={() => deleteNote()} />

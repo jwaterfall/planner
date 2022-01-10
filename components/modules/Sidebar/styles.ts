@@ -118,9 +118,9 @@ export const Margin = styled.div`
 `;
 
 export const ColorIcon = styled.div<{ color: string }>`
-  border: 0.2rem solid ${(props) => props.color};
+  border: 0.15rem solid ${(props) => props.color};
   border-radius: 0.3rem;
-  width: 0.85rem;
-  height: 0.85rem;
-  margin: 0.325rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  margin: 0.375rem;
 `;

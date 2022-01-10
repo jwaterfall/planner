@@ -37,13 +37,8 @@ const EditProjectModal: FC<Props> = ({ show, onHide, project }) => {
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing project</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input
-          required
-          placeholder="Name"
-          value={name}
-          onChange={handleOnChangeName}
-        />
-        <ModalColorPicker value={color} onChange={setColor} />
+        <Input required placeholder="Name" value={name} onChange={handleOnChangeName} />
+        <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>
             Cancel

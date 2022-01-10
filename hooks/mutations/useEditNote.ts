@@ -7,6 +7,7 @@ interface Changes {
   title?: string;
   description?: string;
   color?: string;
+  tags?: string[]
 }
 
 const editNote = async (id: string, changes: Changes) => {
