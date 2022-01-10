@@ -4,8 +4,13 @@ import Masonry from 'react-masonry-css';
 import useNotes from '../../../hooks/queries/useNotes';
 import Note from '../../modules/Note';
 
-const NoteList: FC = () => {
-  const { data: notes } = useNotes();
+interface NoteListProps {
+  projectId?: string;
+  tagId?: string;
+}
+
+const NoteList: FC<NoteListProps> = ({ projectId, tagId }) => {
+  const { data: notes } = useNotes(projectId, tagId);
 
   const breakpointColumns = {
     default: 5,

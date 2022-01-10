@@ -14,7 +14,11 @@ import Modal, {
   ModalTitle,
 } from '../../templates/Modal';
 
-const AddNoteModal: FC<ModalProps> = ({ show, onHide }) => {
+interface AddNoteModalProps extends ModalProps {
+  projectId?: string;
+}
+
+const AddNoteModal: FC<AddNoteModalProps> = ({ show, onHide, projectId }) => {
   const [title, handleOnChangeTitle, setTitle] = useInput('');
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
@@ -23,7 +27,7 @@ const AddNoteModal: FC<ModalProps> = ({ show, onHide }) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    createNote({ title, description, color, type: 'default', tags });
+    createNote({ title, description, color, type: 'default', tags, project: projectId });
     setTitle('');
     setDescription('');
     setColor(picker[0]);

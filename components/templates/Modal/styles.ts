@@ -4,7 +4,6 @@ import {
   foreground,
   overlay2,
   overlay3,
-  primary,
   selection,
   shadow,
   text,
@@ -115,24 +114,5 @@ export const TagPickerTag = styled.div`
   user-select: none;
   &:hover {
     color: ${text};
-  }
-`;
-
-export const TagPickerRadial = styled.div<{ active: boolean }>`
-  border: 0.15rem solid ${overlay3};
-  width: 1rem;
-  height: 1rem;
-  border-radius: 0.5rem;
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  &:before {
-    position: absolute;
-    content: '';
-    background: ${(props) => props.active && primary};
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 0.25rem;
   }
 `;

@@ -18,14 +18,7 @@ import AddProjectModal from '../AddProjectModal';
 import AddTagModal from '../AddTagModal';
 import ProjectNavItem from './ProjectNavItem';
 import TagNavItem from './TagNavItem';
-import {
-  AddNew,
-  CollapsibleMenu,
-  Container,
-  Margin,
-  NavItem,
-  Section,
-} from './styles';
+import { AddNew, CollapsibleMenu, Container, Margin, NavItem, Section } from './styles';
 
 const Sidebar: FC = () => {
   const [tagModalVisibility, setTagModalVisibility] = useState(false);
@@ -38,10 +31,7 @@ const Sidebar: FC = () => {
 
   return (
     <>
-      <AddTagModal
-        show={tagModalVisibility}
-        onHide={() => setTagModalVisibility(false)}
-      />
+      <AddTagModal show={tagModalVisibility} onHide={() => setTagModalVisibility(false)} />
       <AddProjectModal
         show={projectModalVisibility}
         onHide={() => setProjectModalVisibility(false)}
@@ -62,10 +52,7 @@ const Sidebar: FC = () => {
           </NavLink>
         </Section>
         <Section>
-          <CollapsibleMenu
-            onClick={toggleTagsVisibility}
-            isOpened={tagsVisibility}
-          >
+          <CollapsibleMenu onClick={toggleTagsVisibility} isOpened={tagsVisibility}>
             <HiOutlineTag />
             Tags
             <HiOutlineChevronLeft />
@@ -83,10 +70,7 @@ const Sidebar: FC = () => {
           </Collapse>
         </Section>
         <Section>
-          <CollapsibleMenu
-            onClick={toggleProjectsVisibility}
-            isOpened={projectsVisibility}
-          >
+          <CollapsibleMenu onClick={toggleProjectsVisibility} isOpened={projectsVisibility}>
             <HiOutlineFolder />
             Projects
             <HiOutlineChevronLeft />

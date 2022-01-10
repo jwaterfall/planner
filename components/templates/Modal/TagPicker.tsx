@@ -1,14 +1,15 @@
 import { FC } from 'react';
 
 import useTags from '../../../hooks/queries/useTags';
+import Radial from '../../elements/Radial';
 import { SectionTitle, TagPickerContainer, TagPickerRadial, TagPickerTag } from './styles';
 
-export interface ColorPickerProps {
+export interface TagPickerProps {
   tags: string[];
   setTags: (newValue: string[]) => void;
 }
 
-const TagPicker: FC<ColorPickerProps> = ({ tags, setTags }) => {
+const TagPicker: FC<TagPickerProps> = ({ tags, setTags }) => {
   const { data: allTags } = useTags();
 
   const hasTag = (id: string) => {
@@ -25,7 +26,7 @@ const TagPicker: FC<ColorPickerProps> = ({ tags, setTags }) => {
       <TagPickerContainer>
         {allTags.map((tag) => (
           <TagPickerTag key={tag._id} onClick={() => toggleTag(tag._id)}>
-            <TagPickerRadial  active={hasTag(tag._id)}/>
+            <Radial checked={hasTag(tag._id)} />
             {tag.name}
           </TagPickerTag>
         ))}

@@ -1,9 +1,5 @@
 import React, { FC, useState } from 'react';
-import {
-  HiDotsVertical,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from 'react-icons/hi';
+import { HiDotsVertical, HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 
 import useDeleteProject from '../../../hooks/mutations/useDeleteProject';
 import { Project } from '../../../models/project';
@@ -29,7 +25,7 @@ const ProjectNavItem: FC<ProjectProps> = ({ project }) => {
         onHide={() => setEditModalVisibility(false)}
         project={project}
       />
-      <NavLink href={`/project/${project._id}`} key={project._id} passHref>
+      <NavLink href={`/projects/${project._id}`} key={project._id} passHref>
         <DropdownNavItem color={project.color}>
           <ColorIcon color={project.color} />
           {project.name}

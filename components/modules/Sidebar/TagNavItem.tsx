@@ -1,9 +1,5 @@
 import React, { FC, useState } from 'react';
-import {
-  HiDotsVertical,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from 'react-icons/hi';
+import { HiDotsVertical, HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 
 import useDeleteTag from '../../../hooks/mutations/useDeleteTag';
 import { Tag } from '../../../models/tag';
@@ -29,7 +25,7 @@ const TagNavItem: FC<TagProps> = ({ tag }) => {
         onHide={() => setEditModalVisibility(false)}
         tag={tag}
       />
-      <NavLink href={`/tag/${tag._id}`} key={tag._id} passHref>
+      <NavLink href={`/tags/${tag._id}`} key={tag._id} passHref>
         <DropdownNavItem color={tag.color}>
           <ColorIcon color={tag.color} />
           {tag.name}

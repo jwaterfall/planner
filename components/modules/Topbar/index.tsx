@@ -4,7 +4,11 @@ import Button from '../../elements/Button';
 import AddNoteModal from '../AddNoteModal';
 import { Container } from './styles';
 
-const Topbar: FC = () => {
+interface TopbarProps {
+  projectId?: string;
+}
+
+const Topbar: FC<TopbarProps> = ({ projectId }) => {
   const [modalVisiblility, setModalVisibility] = useState(false);
 
   return (
@@ -12,6 +16,7 @@ const Topbar: FC = () => {
       <AddNoteModal
         show={modalVisiblility}
         onHide={() => setModalVisibility(false)}
+        projectId={projectId}
       />
       <Container>
         <Button onClick={() => setModalVisibility(true)}>Add Note</Button>

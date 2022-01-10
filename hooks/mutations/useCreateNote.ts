@@ -8,7 +8,6 @@ export interface NewBaseNote {
   color: string;
   tags: string[];
   reminder?: Date;
-  tag?: string;
   project?: string;
 }
 
@@ -39,8 +38,7 @@ const useCreateNote = () => {
     onSuccess: (note) => {
       const previousNotes = queryClient.getQueryData<Note[]>('notes');
 
-      if (previousNotes)
-        queryClient.setQueryData('notes', [...previousNotes, note]);
+      if (previousNotes) queryClient.setQueryData('notes', [...previousNotes, note]);
     },
   });
 };
