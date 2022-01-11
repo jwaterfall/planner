@@ -3,15 +3,18 @@ import { useQuery } from 'react-query';
 
 import { Note } from '../../models/note';
 
-const getNotes = async (projectId?: string, tagId?: string) => {
+async function getNotes(projectId?: string) {
   const { origin } = window.location;
-  const response = await axios.get(`${origin}/api/notes`, { params: { projectId, tagId } });
+  const response = await axios.get(`${origin}/api/notes`, { params: { projectId } });
 
   const notes = response.data;
   return notes;
-};
+}
 
-const useNotes = (projectId?: string, tagId?: string) =>
-  useQuery<Note[]>(['notes', projectId, tagId], () => getNotes(projectId, tagId));
+function useNotes(projectId?: string) {
+  const queryKey = projectId ? ['notes', projectId] : 'notes';
+
+  return useQuery<Note[]>(queryKey, () => getNotes(projectId));
+}
 
 export default useNotes;

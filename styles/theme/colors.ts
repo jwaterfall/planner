@@ -71,7 +71,7 @@ export const primaryHover = theme('mode', {
 });
 
 export const picker = [
-  'rgb(184, 37, 95)',
+  'rgb(236,54,141)',
   'rgb(219, 64, 53)',
   'rgb(255, 153, 51)',
   'rgb(250, 208, 0)',

@@ -17,14 +17,15 @@ import Modal, {
 
 interface Props extends ModalProps {
   note?: DefaultNote;
+  projectId?: string;
 }
 
-const EditNoteModal: FC<Props> = ({ show, onHide, note }) => {
+const EditNoteModal: FC<Props> = ({ show, onHide, note, projectId }) => {
   const [title, handleOnChangeTitle, setTitle] = useInput('');
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const [tags, setTags] = useState<string[]>([]);
-  const { mutate: editNote } = useEditNote(note?._id);
+  const { mutate: editNote } = useEditNote(note?._id, projectId);
 
   useEffect(() => {
     setTitle(note?.title);

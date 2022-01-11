@@ -5,12 +5,19 @@ import useNotes from '../../../hooks/queries/useNotes';
 import Note from '../../modules/Note';
 
 interface NoteListProps {
-  projectId?: string;
   tagId?: string;
+  projectId?: string;
 }
 
-const NoteList: FC<NoteListProps> = ({ projectId, tagId }) => {
-  const { data: notes } = useNotes(projectId, tagId);
+const NoteList: FC<NoteListProps> = ({ tagId, projectId }) => {
+  const { data: notes } = useNotes(projectId);
+
+  const filteredNotes = tagId
+    ? notes.filter((note) => {
+        const tagIds = note.tags.map((tag) => tag._id);
+        return tagIds.includes(tagId);
+      })
+    : notes;
 
   const breakpointColumns = {
     default: 5,
@@ -27,8 +34,8 @@ const NoteList: FC<NoteListProps> = ({ projectId, tagId }) => {
       className="my-masonry-grid"
       columnClassName="my-masonry-grid_column"
     >
-      {notes?.map((note, index) => (
-        <Note note={note} key={index} />
+      {filteredNotes?.map((note, index) => (
+        <Note note={note} projectId={projectId} key={index} />
       ))}
     </Masonry>
   );

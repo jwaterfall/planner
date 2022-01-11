@@ -9,9 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await connectToDatabase();
 
-        const query: any = {};
-        if (req.query.projectId) query.project = req.query.projectId;
-        if (req.query.tagId) query.tags = req.query.tagId;
+        const query: any = { project: req.query.projectId };
 
         const notes = await Note.find(query).populate('tags');
 

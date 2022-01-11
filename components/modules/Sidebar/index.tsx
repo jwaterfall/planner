@@ -47,7 +47,7 @@ const Sidebar: FC = () => {
           <NavLink href="/today">
             <NavItem>
               <HiOutlineCalendar />
-              Today
+              Upcoming
             </NavItem>
           </NavLink>
         </Section>

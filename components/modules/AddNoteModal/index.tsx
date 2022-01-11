@@ -23,7 +23,7 @@ const AddNoteModal: FC<AddNoteModalProps> = ({ show, onHide, projectId }) => {
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const [tags, setTags] = useState<string[]>([]);
-  const { mutate: createNote } = useCreateNote();
+  const { mutate: createNote } = useCreateNote(projectId);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

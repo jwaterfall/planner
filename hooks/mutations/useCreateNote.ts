@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useMutation, useQueryClient } from 'react-query';
+import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
 import { Note } from '../../models/note';
 
@@ -23,24 +23,29 @@ export interface NewChecklistNote extends NewBaseNote {
 
 export type NewNote = NewDefaultNote | NewChecklistNote;
 
-const createNote = async (newNote: NewNote) => {
+async function createNote(newNote: NewNote) {
   const { origin } = window.location;
   const response = await axios.put<Note>(`${origin}/api/notes`, newNote);
 
   const note = response.data;
   return note;
-};
+}
 
-const useCreateNote = () => {
+function updateQueryCache(queryClient: QueryClient, note: Note, projectId?: string) {
+  const queryKey = projectId ? ['notes', projectId] : 'notes';
+  const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
+
+  if (!previousNotes) return;
+
+  queryClient.setQueryData(queryKey, [...previousNotes, note]);
+}
+
+function useCreateNote(projectId?: string) {
   const queryClient = useQueryClient();
 
   return useMutation((newNote: NewNote) => createNote(newNote), {
-    onSuccess: (note) => {
-      const previousNotes = queryClient.getQueryData<Note[]>('notes');
-
-      if (previousNotes) queryClient.setQueryData('notes', [...previousNotes, note]);
-    },
+    onSuccess: (newNote) => updateQueryCache(queryClient, newNote, projectId),
   });
-};
+}
 
 export default useCreateNote;

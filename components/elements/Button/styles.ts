@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 import { primary, primaryHover, shadow, textButton } from '../../../styles/theme/colors';
-import { weight2, weight3 } from '../../../styles/theme/font';
 
 export const PrimaryButton = styled.button`
   background: ${primary};
