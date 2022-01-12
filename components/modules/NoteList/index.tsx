@@ -14,7 +14,7 @@ const NoteList: FC<NoteListProps> = ({ tagId, projectId }) => {
 
   const filteredNotes = !tagId
     ? notes
-    : notes.filter((note) => {
+    : notes?.filter((note) => {
         const tagIds = note.tags.map((tag) => tag._id);
         return tagIds.includes(tagId);
       });

@@ -2,13 +2,14 @@ import { FC, useState } from 'react';
 
 import Button from '../../elements/Button';
 import AddNoteModal from '../AddNoteModal';
-import { Container } from './styles';
+import { Container, Title } from './styles';
 
 interface TopbarProps {
+  title?: string;
   projectId?: string;
 }
 
-const Topbar: FC<TopbarProps> = ({ projectId }) => {
+const Topbar: FC<TopbarProps> = ({ title, projectId }) => {
   const [modalVisiblility, setModalVisibility] = useState(false);
 
   return (
@@ -20,6 +21,7 @@ const Topbar: FC<TopbarProps> = ({ projectId }) => {
       />
       <Container>
         <Button onClick={() => setModalVisibility(true)}>Add Note</Button>
+        <Title>{title}</Title>
       </Container>
     </>
   );

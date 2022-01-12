@@ -15,8 +15,7 @@ export default async function handler(
 
         res.json(projects);
       } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ error: (err as Error).message });
       }
       break;
     case 'PUT':
@@ -27,8 +26,7 @@ export default async function handler(
         await project.save();
         res.json(project);
       } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ error: (err as Error).message });
       }
       break;
     default:

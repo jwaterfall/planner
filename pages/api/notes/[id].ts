@@ -20,8 +20,7 @@ export default async function handler(
 
         res.json(note);
       } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ error: (err as Error).message });
       }
       break;
     case 'DELETE':
@@ -34,8 +33,7 @@ export default async function handler(
 
         res.json(note);
       } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ error: (err as Error).message });
       }
       break;
     default:

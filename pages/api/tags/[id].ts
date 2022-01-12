@@ -10,6 +10,17 @@ export default async function handler(
   const { id } = req.query;
 
   switch (req.method) {
+    case 'GET':
+      try {
+        await connectToDatabase();
+
+        const tag = await Tag.findById(id);
+
+        res.json(tag);
+      } catch (err) {
+        res.status(500).json({ error: (err as Error).message });
+      }
+      break;
     case 'PATCH':
       try {
         await connectToDatabase();
@@ -18,8 +29,7 @@ export default async function handler(
 
         res.json(tag);
       } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ error: (err as Error).message });
       }
       break;
     case 'DELETE':
@@ -30,12 +40,11 @@ export default async function handler(
 
         res.json(tag);
       } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
+        res.status(500).json({ error: (err as Error).message });
       }
       break;
     default:
-      res.setHeader('Allow', ['PATCH', 'DELETE']);
+      res.setHeader('Allow', ['GET', 'PATCH', 'DELETE']);
       res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

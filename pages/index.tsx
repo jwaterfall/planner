@@ -5,7 +5,7 @@ import Topbar from '../components/modules/Topbar';
 
 const IndexPage: FC = () => (
   <>
-    <Topbar />
+    <Topbar title="Home" />
     <NoteList />
   </>
 );
