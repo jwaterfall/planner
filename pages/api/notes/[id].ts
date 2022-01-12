@@ -1,19 +1,14 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import connectToDatabase from '../../../middleware/connectToDatabase';
 import Note from '../../../models/note';
-import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
 
   switch (req.method) {
     case 'PATCH':
       try {
-        await connectToDatabase();
-
         const note = await Note.findByIdAndUpdate(id, req.body, { new: true })
           .populate('tags')
           .populate('project');
@@ -25,8 +20,6 @@ export default async function handler(
       break;
     case 'DELETE':
       try {
-        await connectToDatabase();
-
         const note = await Note.findByIdAndDelete(id)
           .populate('tags')
           .populate('project');
@@ -41,3 +34,5 @@ export default async function handler(
       res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+
+export default connectToDatabase(handler);

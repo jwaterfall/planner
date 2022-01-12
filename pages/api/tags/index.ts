@@ -1,17 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import connectToDatabase from '../../../middleware/connectToDatabase';
 import Tag from '../../../models/tag';
-import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        await connectToDatabase();
-
         const tags = await Tag.find();
 
         res.json(tags);
@@ -21,8 +16,6 @@ export default async function handler(
       break;
     case 'PUT':
       try {
-        await connectToDatabase();
-
         const tag = new Tag(req.body);
 
         await tag.save();
@@ -36,3 +29,5 @@ export default async function handler(
       res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+
+export default connectToDatabase(handler);

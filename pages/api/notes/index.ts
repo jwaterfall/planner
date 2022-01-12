@@ -1,17 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import connectToDatabase from '../../../middleware/connectToDatabase';
 import Note from '../../../models/note';
-import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        await connectToDatabase();
-
         const query: any = { project: req.query.projectId };
 
         const notes = await Note.find(query)
@@ -25,8 +20,6 @@ export default async function handler(
       break;
     case 'PUT':
       try {
-        await connectToDatabase();
-
         const date = new Date();
         const note = new Note({ ...req.body, date });
 
@@ -45,3 +38,5 @@ export default async function handler(
       res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+
+export default connectToDatabase(handler);
