@@ -7,15 +7,21 @@ export interface NavLinkProps extends LinkProps {
 }
 
 const NavLink: FC<NavLinkProps> = ({ children, href, ...props }) => {
-  const { asPath } = useRouter();
+  const { asPath: currentPath } = useRouter();
+
+  if (currentPath === href) {
+    return (
+      <Link href={href} {...props}>
+        {cloneElement(children, {
+          className: `${children.props.className} active`,
+        })}
+      </Link>
+    );
+  }
 
   return (
     <Link href={href} {...props}>
-      {asPath === href
-        ? cloneElement(children, {
-            className: `${children.props.className || ''}active`,
-          })
-        : children}
+      {children}
     </Link>
   );
 };

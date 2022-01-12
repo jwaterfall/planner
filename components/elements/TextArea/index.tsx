@@ -7,9 +7,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLTextAreaElement> {
 }
 
 const TextArea: FC<InputProps> = ({ variant = 'primary', ...props }) => {
-  if (variant === 'primary') return <PrimaryTextArea {...props} />;
-
-  return <></>;
+  switch (variant) {
+    case 'primary':
+      return <PrimaryTextArea {...props} />;
+    default:
+      return <></>;
+  }
 };
 
 export default TextArea;

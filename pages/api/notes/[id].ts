@@ -3,7 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Note from '../../../models/note';
 import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const { id } = req.query;
 
   switch (req.method) {
@@ -11,7 +14,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await connectToDatabase();
 
-        const note = await Note.findByIdAndUpdate(id, req.body, { new: true }).populate('tags');
+        const note = await Note.findByIdAndUpdate(id, req.body, { new: true })
+          .populate('tags')
+          .populate('project');
 
         res.json(note);
       } catch (err) {
@@ -23,7 +28,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       try {
         await connectToDatabase();
 
-        const note = await Note.findByIdAndDelete(id).populate('tags');
+        const note = await Note.findByIdAndDelete(id)
+          .populate('tags')
+          .populate('project');
 
         res.json(note);
       } catch (err) {

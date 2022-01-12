@@ -1,5 +1,9 @@
 import React, { FC, useState } from 'react';
-import { HiDotsVertical, HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
+import {
+  HiDotsVertical,
+  HiOutlinePencil,
+  HiOutlineTrash,
+} from 'react-icons/hi';
 
 import useDeleteProject from '../../../hooks/mutations/useDeleteProject';
 import { Project } from '../../../models/project';
@@ -16,7 +20,7 @@ const ProjectNavItem: FC<ProjectProps> = ({ project }) => {
   const [dropdownVisivbility, setDropdownVisibility] = useState(false);
   const [editModalVisibility, setEditModalVisibility] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);
-  const { mutate: deleteProject } = useDeleteProject(project._id);
+  const { mutate: deleteProject } = useDeleteProject(project);
 
   return (
     <>

@@ -27,24 +27,26 @@ async function createNote(newNote: NewNote) {
   const { origin } = window.location;
   const response = await axios.put<Note>(`${origin}/api/notes`, newNote);
 
-  const note = response.data;
-  return note;
+  const createdNote = response.data;
+  return createdNote;
 }
 
-function updateQueryCache(queryClient: QueryClient, note: Note, projectId?: string) {
+function updateQueryCache(queryClient: QueryClient, createdNote: Note) {
+  const projectId = createdNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
+
   const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
 
   if (!previousNotes) return;
 
-  queryClient.setQueryData(queryKey, [...previousNotes, note]);
+  queryClient.setQueryData(queryKey, [...previousNotes, createdNote]);
 }
 
-function useCreateNote(projectId?: string) {
+function useCreateNote() {
   const queryClient = useQueryClient();
 
   return useMutation((newNote: NewNote) => createNote(newNote), {
-    onSuccess: (newNote) => updateQueryCache(queryClient, newNote, projectId),
+    onSuccess: (createdNote) => updateQueryCache(queryClient, createdNote),
   });
 }
 

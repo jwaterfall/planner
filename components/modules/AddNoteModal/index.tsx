@@ -23,23 +23,35 @@ const AddNoteModal: FC<AddNoteModalProps> = ({ show, onHide, projectId }) => {
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const [tags, setTags] = useState<string[]>([]);
-  const { mutate: createNote } = useCreateNote(projectId);
+  const { mutate: createNote } = useCreateNote();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    createNote({ title, description, color, type: 'default', tags, project: projectId });
+    createNote({
+      title,
+      description,
+      color,
+      type: 'default',
+      tags,
+      project: projectId,
+    });
     setTitle('');
     setDescription('');
     setColor(picker[0]);
     setTags([]);
     onHide();
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Add new note</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input required placeholder="Name" value={title} onChange={handleOnChangeTitle} />
+        <Input
+          required
+          placeholder="Name"
+          value={title}
+          onChange={handleOnChangeTitle}
+        />
         <TextArea
           required
           placeholder="Description"

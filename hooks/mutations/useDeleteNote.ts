@@ -7,27 +7,29 @@ async function deleteNote(id: string) {
   const { origin } = window.location;
   const response = await axios.delete<Note>(`${origin}/api/notes/${id}`);
 
-  const note = response.data;
-  return note;
+  const deletedNote = response.data;
+  return deletedNote;
 }
 
-function updateQueryCache(queryClient: QueryClient, id: string, projectId?: string) {
+function updateQueryCache(queryClient: QueryClient, deletedNote: Note) {
+  const projectId = deletedNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
+
   const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
 
   if (!previousNotes) return;
 
   queryClient.setQueryData(
     queryKey,
-    previousNotes.filter((note) => note._id !== id),
+    previousNotes.filter((note) => note._id !== deletedNote._id),
   );
 }
 
-function useDeleteNote(id: string, projectId?: string) {
+function useDeleteNote(note: Note) {
   const queryClient = useQueryClient();
 
-  return useMutation(() => deleteNote(id), {
-    onSuccess: () => updateQueryCache(queryClient, id, projectId),
+  return useMutation(() => deleteNote(note._id), {
+    onSuccess: () => updateQueryCache(queryClient, note),
   });
 }
 

@@ -12,12 +12,12 @@ interface NoteListProps {
 const NoteList: FC<NoteListProps> = ({ tagId, projectId }) => {
   const { data: notes } = useNotes(projectId);
 
-  const filteredNotes = tagId
-    ? notes.filter((note) => {
+  const filteredNotes = !tagId
+    ? notes
+    : notes.filter((note) => {
         const tagIds = note.tags.map((tag) => tag._id);
         return tagIds.includes(tagId);
-      })
-    : notes;
+      });
 
   const breakpointColumns = {
     default: 5,
@@ -35,7 +35,7 @@ const NoteList: FC<NoteListProps> = ({ tagId, projectId }) => {
       columnClassName="my-masonry-grid_column"
     >
       {filteredNotes?.map((note, index) => (
-        <Note note={note} projectId={projectId} key={index} />
+        <Note note={note} key={index} />
       ))}
     </Masonry>
   );

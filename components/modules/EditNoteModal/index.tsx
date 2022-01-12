@@ -17,15 +17,14 @@ import Modal, {
 
 interface Props extends ModalProps {
   note?: DefaultNote;
-  projectId?: string;
 }
 
-const EditNoteModal: FC<Props> = ({ show, onHide, note, projectId }) => {
+const EditNoteModal: FC<Props> = ({ show, onHide, note }) => {
   const [title, handleOnChangeTitle, setTitle] = useInput('');
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const [tags, setTags] = useState<string[]>([]);
-  const { mutate: editNote } = useEditNote(note?._id, projectId);
+  const { mutate: editNote } = useEditNote(note);
 
   useEffect(() => {
     setTitle(note?.title);
@@ -34,17 +33,22 @@ const EditNoteModal: FC<Props> = ({ show, onHide, note, projectId }) => {
     setTags(note?.tags.map((tag) => tag._id));
   }, [note, setTitle, setDescription, setColor]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     editNote({ title, description, color, tags });
     onHide();
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing note</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input required placeholder="Name" value={title} onChange={handleOnChangeTitle} />
+        <Input
+          required
+          placeholder="Name"
+          value={title}
+          onChange={handleOnChangeTitle}
+        />
         <TextArea
           required
           placeholder="Description"

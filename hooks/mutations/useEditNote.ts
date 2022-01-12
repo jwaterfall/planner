@@ -12,29 +12,36 @@ interface Changes {
 
 async function editNote(id: string, changes: Changes) {
   const { origin } = window.location;
-  const response = await axios.patch<Note>(`${origin}/api/notes/${id}`, changes);
+  const response = await axios.patch<Note>(
+    `${origin}/api/notes/${id}`,
+    changes,
+  );
 
   const note = response.data;
   return note;
 }
 
-function updateQueryCache(queryClient: QueryClient, note: Note, projectId?: string) {
+function updateQueryCache(queryClient: QueryClient, updatedNote: Note) {
+  const projectId = updatedNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
+
   const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
 
   if (!previousNotes) return;
 
   queryClient.setQueryData(
     queryKey,
-    previousNotes.map((n) => (n._id === note._id ? note : n)),
+    previousNotes.map((note) =>
+      note._id === updatedNote._id ? updatedNote : note,
+    ),
   );
 }
 
-const useEditNote = (id: string, projectId?: string) => {
+const useEditNote = (note: Note) => {
   const queryClient = useQueryClient();
 
-  return useMutation((changes: Changes) => editNote(id, changes), {
-    onSuccess: (newNote) => updateQueryCache(queryClient, newNote, projectId),
+  return useMutation((changes: Changes) => editNote(note._id, changes), {
+    onSuccess: (updatedNote) => updateQueryCache(queryClient, updatedNote),
   });
 };
 

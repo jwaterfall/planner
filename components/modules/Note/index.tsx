@@ -8,12 +8,11 @@ import { Body, Card, Tag, Tags, Title, Toolbar } from './styles';
 
 export interface NoteProps {
   note: Note;
-  projectId?: string;
 }
 
-const NoteComponent: FC<NoteProps> = ({ note, projectId }) => {
+const NoteComponent: FC<NoteProps> = ({ note }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
-  const { mutate: deleteNote } = useDeleteNote(note._id, projectId);
+  const { mutate: deleteNote } = useDeleteNote(note);
 
   switch (note.type) {
     case 'default':
@@ -23,8 +22,8 @@ const NoteComponent: FC<NoteProps> = ({ note, projectId }) => {
             show={modalVisibility}
             onHide={() => setModalVisibility(false)}
             note={note}
-            projectId={projectId}
           />
+
           <Card color={note.color}>
             {note.title && <Title>{note.title}</Title>}
             <Body>{note.description}</Body>

@@ -17,13 +17,13 @@ const AddProjectModal: FC<ModalProps> = ({ show, onHide }) => {
   const [color, setColor] = useState(picker[0]);
   const { mutate: createProject } = useCreateProject();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     createProject({ name, color });
     setName('');
     setColor(picker[0]);
     onHide();
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide}>

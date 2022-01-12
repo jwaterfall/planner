@@ -20,24 +20,29 @@ interface Props extends ModalProps {
 const EditProjectModal: FC<Props> = ({ show, onHide, project }) => {
   const [name, handleOnChangeName, setName] = useInput('');
   const [color, setColor] = useState(picker[0]);
-  const { mutate: editProject } = useEditProject(project?._id);
+  const { mutate: editProject } = useEditProject(project);
 
   useEffect(() => {
     setName(project?.name);
     setColor(project?.color);
   }, [project, setName, setColor]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     editProject({ name, color });
     onHide();
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing project</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input required placeholder="Name" value={name} onChange={handleOnChangeName} />
+        <Input
+          required
+          placeholder="Name"
+          value={name}
+          onChange={handleOnChangeName}
+        />
         <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>

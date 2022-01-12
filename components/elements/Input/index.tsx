@@ -7,9 +7,12 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 const Input: FC<InputProps> = ({ variant = 'primary', ...props }) => {
-  if (variant === 'primary') return <PrimaryInput {...props} />;
-
-  return <></>;
+  switch (variant) {
+    case 'primary':
+      return <PrimaryInput {...props} />;
+    default:
+      return <></>;
+  }
 };
 
 export default Input;

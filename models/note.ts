@@ -1,5 +1,6 @@
 import mongoose, { Document, Schema, model } from 'mongoose';
 
+import { Project } from './project';
 import { Tag } from './tag';
 
 export interface BaseNote extends Document {
@@ -8,7 +9,7 @@ export interface BaseNote extends Document {
   date: Date;
   tags: Tag[];
   reminder?: Date;
-  project?: string;
+  project?: Project;
 }
 
 export interface DefaultNote extends BaseNote {
@@ -31,7 +32,7 @@ const noteSchema = new Schema<Note>(
     date: { required: true, type: Date },
     tags: { required: true, type: [Schema.Types.ObjectId], ref: 'Tag' },
     reminder: Date,
-    project: String,
+    project: { type: Schema.Types.ObjectId, ref: 'Project' },
     description: String,
     items: [{ item: String, completed: Boolean }],
   },

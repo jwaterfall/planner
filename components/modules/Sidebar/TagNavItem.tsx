@@ -1,5 +1,9 @@
 import React, { FC, useState } from 'react';
-import { HiDotsVertical, HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
+import {
+  HiDotsVertical,
+  HiOutlinePencil,
+  HiOutlineTrash,
+} from 'react-icons/hi';
 
 import useDeleteTag from '../../../hooks/mutations/useDeleteTag';
 import { Tag } from '../../../models/tag';
@@ -16,7 +20,7 @@ const TagNavItem: FC<TagProps> = ({ tag }) => {
   const [dropdownVisivbility, setDropdownVisibility] = useState(false);
   const [editModalVisibility, setEditModalVisibility] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);
-  const { mutate: deleteTag } = useDeleteTag(tag._id);
+  const { mutate: deleteTag } = useDeleteTag(tag);
 
   return (
     <>

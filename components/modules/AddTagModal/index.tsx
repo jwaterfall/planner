@@ -17,13 +17,13 @@ const AddTagModal: FC<ModalProps> = ({ show, onHide }) => {
   const [color, setColor] = useState(picker[0]);
   const { mutate: createTag } = useCreateTag();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     createTag({ name, color });
     setName('');
     setColor(picker[0]);
     onHide();
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide}>

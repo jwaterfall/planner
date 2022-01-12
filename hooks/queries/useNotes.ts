@@ -5,7 +5,9 @@ import { Note } from '../../models/note';
 
 async function getNotes(projectId?: string) {
   const { origin } = window.location;
-  const response = await axios.get(`${origin}/api/notes`, { params: { projectId } });
+  const response = await axios.get(`${origin}/api/notes`, {
+    params: { projectId },
+  });
 
   const notes = response.data;
   return notes;

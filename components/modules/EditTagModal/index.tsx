@@ -20,24 +20,29 @@ interface Props extends ModalProps {
 const EditTagModal: FC<Props> = ({ show, onHide, tag }) => {
   const [name, handleOnChangeName, setName] = useInput('');
   const [color, setColor] = useState(picker[0]);
-  const { mutate: editTag } = useEditTag(tag?._id);
+  const { mutate: editTag } = useEditTag(tag);
 
   useEffect(() => {
     setName(tag?.name);
     setColor(tag?.color);
   }, [tag, setName, setColor]);
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     editTag({ name, color });
     onHide();
-  };
+  }
 
   return (
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing tag</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input required placeholder="Name" value={name} onChange={handleOnChangeName} />
+        <Input
+          required
+          placeholder="Name"
+          value={name}
+          onChange={handleOnChangeName}
+        />
         <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>
