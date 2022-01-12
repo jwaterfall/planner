@@ -3,7 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import Tag from '../../../models/tag';
 import { connectToDatabase } from '../../../utils/connection';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const { id } = req.query;
 
   switch (req.method) {
@@ -16,7 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.json(tag);
       } catch (err) {
         console.log(err);
-        res.status(500).send('error');
+        res.status(500).json(err);
       }
       break;
     case 'DELETE':
@@ -28,7 +31,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         res.json(tag);
       } catch (err) {
         console.log(err);
-        res.status(500).send('error');
+        res.status(500).json(err);
       }
       break;
     default:

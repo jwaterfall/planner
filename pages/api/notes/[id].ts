@@ -21,7 +21,7 @@ export default async function handler(
         res.json(note);
       } catch (err) {
         console.log(err);
-        res.status(500).send('error');
+        res.status(500).json(err);
       }
       break;
     case 'DELETE':
@@ -35,7 +35,7 @@ export default async function handler(
         res.json(note);
       } catch (err) {
         console.log(err);
-        res.status(500).send('error');
+        res.status(500).json(err);
       }
       break;
     default:

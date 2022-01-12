@@ -17,7 +17,7 @@ export default async function handler(
         res.json(tags);
       } catch (err) {
         console.log(err);
-        res.status(500).send('error');
+        res.status(500).json(err);
       }
       break;
     case 'PUT':
@@ -30,7 +30,7 @@ export default async function handler(
         res.json(tag);
       } catch (err) {
         console.log(err);
-        res.status(500).send('error');
+        res.status(500).json(err);
       }
       break;
     default:
