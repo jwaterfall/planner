@@ -2,16 +2,16 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
 import Note from '../../../models/note';
+import Project from '../../../models/project';
+import Tag from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        const query: any = { project: req.query.projectId };
-
-        const notes = await Note.find(query)
-          .populate('tags')
-          .populate('project');
+        const notes = await Note.find({ project: req.query.projectId })
+          .populate({ path: 'tags', model: Tag })
+          .populate({ path: 'project', model: Project });
 
         res.json(notes);
       } catch (err) {

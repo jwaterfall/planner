@@ -2,6 +2,8 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
 import Note from '../../../models/note';
+import Project from '../../../models/project';
+import Tag from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
@@ -10,8 +12,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     case 'PATCH':
       try {
         const note = await Note.findByIdAndUpdate(id, req.body, { new: true })
-          .populate('tags')
-          .populate('project');
+          .populate({ path: 'tags', model: Tag })
+          .populate({ path: 'project', model: Project });
 
         res.json(note);
       } catch (err) {
@@ -21,8 +23,8 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     case 'DELETE':
       try {
         const note = await Note.findByIdAndDelete(id)
-          .populate('tags')
-          .populate('project');
+          .populate({ path: 'tags', model: Tag })
+          .populate({ path: 'project', model: Project });
 
         res.json(note);
       } catch (err) {
