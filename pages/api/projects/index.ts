@@ -7,7 +7,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case 'GET':
       try {
-        await connectToDatabase();
         const projects = await Project.find();
 
         res.json(projects);
@@ -17,7 +16,6 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'PUT':
       try {
-        await connectToDatabase();
         const project = new Project(req.body);
 
         await project.save();
