@@ -17,7 +17,7 @@ export interface IEditTagModalProps extends IModalProps {
   tag?: ITag;
 }
 
-const EditTagModal: FC<Props> = ({ show, onHide, tag }) => {
+const EditTagModal: FC<IEditTagModalProps> = ({ show, onHide, tag }) => {
   const [name, handleOnChangeName, setName] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const { mutate: editTag } = useEditTag(tag);
