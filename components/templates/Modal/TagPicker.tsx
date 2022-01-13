@@ -24,7 +24,7 @@ const TagPicker: FC<ITagPickerProps> = ({ tags, setTags }) => {
     <div>
       <SectionTitle>Tags</SectionTitle>
       <TagPickerContainer>
-        {allTags.map((tag) => (
+        {allTags?.map((tag) => (
           <TagPickerTag key={tag._id} onClick={() => toggleTag(tag._id)}>
             <Radial checked={hasTag(tag._id)} />
             {tag.name}

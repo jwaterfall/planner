@@ -12,8 +12,6 @@ const Button: FC<IButtonProps> = ({ variant = 'primary', ...props }) => {
       return <PrimaryButton {...props} />;
     case 'secondary':
       return <SecondaryButton {...props} />;
-    default:
-      return <></>;
   }
 };
 

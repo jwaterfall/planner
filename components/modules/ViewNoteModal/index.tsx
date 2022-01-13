@@ -13,6 +13,7 @@ export interface IViewNoteIModalProps extends IModalProps {
 const ViewNoteModal: FC<IViewNoteIModalProps> = ({ show, onHide, note }) => {
   const ref = useRef();
   useOnClickOutside(ref, onHide);
+
   return show ? (
     <Container>
       <div ref={ref}>

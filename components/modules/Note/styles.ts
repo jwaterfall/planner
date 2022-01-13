@@ -88,6 +88,7 @@ export const ModalBody = styled(Body)`
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: ${overlay3} transparent;
+  padding-bottom: 0.25rem;
   &::-webkit-scrollbar {
     width: 0.9rem;
     @media (max-width: 992px) {
@@ -108,6 +109,7 @@ export const Title = styled.h3`
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
+  line-height: normal;
 `;
 
 export const TagsContainer = styled.div`
