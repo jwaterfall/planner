@@ -109,7 +109,6 @@ export const Title = styled.h3`
   margin: 0;
   font-size: 1rem;
   font-weight: 500;
-  line-height: normal;
 `;
 
 export const TagsContainer = styled.div`
