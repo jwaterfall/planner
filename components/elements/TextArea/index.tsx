@@ -1,12 +1,13 @@
-import { FC, InputHTMLAttributes } from 'react';
+import { FC, TextareaHTMLAttributes } from 'react';
 
 import { PrimaryTextArea } from './styles';
 
-export interface InputProps extends InputHTMLAttributes<HTMLTextAreaElement> {
+export interface ITextAreaProps
+  extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   variant?: 'primary';
 }
 
-const TextArea: FC<InputProps> = ({ variant = 'primary', ...props }) => {
+const TextArea: FC<ITextAreaProps> = ({ variant = 'primary', ...props }) => {
   switch (variant) {
     case 'primary':
       return <PrimaryTextArea {...props} />;

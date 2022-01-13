@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { Note } from '../../models/note';
+import { INote } from '../../models/note';
 
-interface Changes {
+export interface IChanges {
   title?: string;
   description?: string;
   color?: string;
   tags?: string[];
 }
 
-async function editNote(id: string, changes: Changes) {
+async function editNote(id: string, changes: IChanges) {
   const { origin } = window.location;
-  const response = await axios.patch<Note>(
+  const response = await axios.patch<INote>(
     `${origin}/api/notes/${id}`,
     changes,
   );
@@ -21,11 +21,11 @@ async function editNote(id: string, changes: Changes) {
   return note;
 }
 
-function updateQueryCache(queryClient: QueryClient, updatedNote: Note) {
+function updateQueryCache(queryClient: QueryClient, updatedNote: INote) {
   const projectId = updatedNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
 
-  const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
+  const previousNotes = queryClient.getQueryData<INote[]>(queryKey);
 
   if (!previousNotes) return;
 
@@ -37,10 +37,10 @@ function updateQueryCache(queryClient: QueryClient, updatedNote: Note) {
   );
 }
 
-const useEditNote = (note: Note) => {
+const useEditNote = (note: INote) => {
   const queryClient = useQueryClient();
 
-  return useMutation((changes: Changes) => editNote(note._id, changes), {
+  return useMutation((changes: IChanges) => editNote(note._id, changes), {
     onSuccess: (updatedNote) => updateQueryCache(queryClient, updatedNote),
   });
 };

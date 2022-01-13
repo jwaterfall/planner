@@ -7,13 +7,13 @@ import { Item, Menu } from './styles';
 
 export const DropdownItem = Item;
 
-export interface DropdownMenuProps {
+export interface IDropdownMenuProps {
   referenceElement: HTMLElement;
   show: boolean;
   onHide: () => void;
 }
 
-export const DropdownMenu: FC<DropdownMenuProps> = ({
+export const DropdownMenu: FC<IDropdownMenuProps> = ({
   referenceElement,
   show,
   onHide,

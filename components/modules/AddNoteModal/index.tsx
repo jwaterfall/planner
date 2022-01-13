@@ -7,18 +7,18 @@ import Button from '../../elements/Button';
 import Input from '../../elements/Input';
 import TextArea from '../../elements/TextArea';
 import Modal, {
+  IModalProps,
   ModalColorPicker,
   ModalFooter,
-  ModalProps,
   ModalTagPicker,
   ModalTitle,
 } from '../../templates/Modal';
 
-interface AddNoteModalProps extends ModalProps {
+export interface IAddNoteIModalProps extends IModalProps {
   projectId?: string;
 }
 
-const AddNoteModal: FC<AddNoteModalProps> = ({ show, onHide, projectId }) => {
+const AddNoteModal: FC<IAddNoteIModalProps> = ({ show, onHide, projectId }) => {
   const [title, handleOnChangeTitle, setTitle] = useInput('');
   const [description, handleOnChangeDescription, setDescription] = useInput('');
   const [color, setColor] = useState(picker[0]);
@@ -31,7 +31,7 @@ const AddNoteModal: FC<AddNoteModalProps> = ({ show, onHide, projectId }) => {
       title,
       description,
       color,
-      type: 'default',
+      variant: 'default',
       tags,
       project: projectId,
     });

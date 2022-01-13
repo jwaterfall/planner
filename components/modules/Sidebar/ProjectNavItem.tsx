@@ -6,17 +6,17 @@ import {
 } from 'react-icons/hi';
 
 import useDeleteProject from '../../../hooks/mutations/useDeleteProject';
-import { Project } from '../../../models/project';
+import { IProject } from '../../../models/project';
 import NavLink from '../../elements/NavLink';
 import { DropdownItem, DropdownMenu } from '../../templates/Dropdown';
 import EditProjectModal from '../EditProjectModal';
 import { CollapsibleArrowIcon, ColorIcon, DropdownNavItem } from './styles';
 
-interface ProjectProps {
-  project: Project;
+export interface IProjectProps {
+  project: IProject;
 }
 
-const ProjectNavItem: FC<ProjectProps> = ({ project }) => {
+const ProjectNavItem: FC<IProjectProps> = ({ project }) => {
   const [dropdownVisivbility, setDropdownVisibility] = useState(false);
   const [editModalVisibility, setEditModalVisibility] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);

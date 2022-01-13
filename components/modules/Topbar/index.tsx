@@ -4,12 +4,12 @@ import Button from '../../elements/Button';
 import AddNoteModal from '../AddNoteModal';
 import { Container, Title } from './styles';
 
-interface TopbarProps {
+export interface ITopbarProps {
   title?: string;
   projectId?: string;
 }
 
-const Topbar: FC<TopbarProps> = ({ title, projectId }) => {
+const Topbar: FC<ITopbarProps> = ({ title, projectId }) => {
   const [modalVisiblility, setModalVisibility] = useState(false);
 
   return (

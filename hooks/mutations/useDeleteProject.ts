@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { Project } from '../../models/project';
+import { IProject } from '../../models/project';
 
 async function deleteProject(id: string) {
   const { origin } = window.location;
-  const response = await axios.delete<Project>(`${origin}/api/projects/${id}`);
+  const response = await axios.delete<IProject>(`${origin}/api/projects/${id}`);
 
   const project = response.data;
   return project;
 }
 
-function updateQueryCache(queryClient: QueryClient, deletedProject: Project) {
-  const previousProjects = queryClient.getQueryData<Project[]>('projects');
+function updateQueryCache(queryClient: QueryClient, deletedProject: IProject) {
+  const previousProjects = queryClient.getQueryData<IProject[]>('projects');
 
   if (!previousProjects) return;
 
@@ -22,7 +22,7 @@ function updateQueryCache(queryClient: QueryClient, deletedProject: Project) {
   );
 }
 
-function useDeleteProject(project: Project) {
+function useDeleteProject(project: IProject) {
   const queryClient = useQueryClient();
 
   return useMutation(() => deleteProject(project._id), {

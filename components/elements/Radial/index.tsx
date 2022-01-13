@@ -2,11 +2,11 @@ import { FC } from 'react';
 
 import { StyledRadial } from './styles';
 
-export interface RadialProps {
+export interface IRadialProps {
   checked: boolean;
 }
 
-const Radial: FC<RadialProps> = ({ checked }) => {
+const Radial: FC<IRadialProps> = ({ checked }) => {
   return <StyledRadial checked={checked} />;
 };
 

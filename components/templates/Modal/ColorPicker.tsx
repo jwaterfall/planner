@@ -3,12 +3,12 @@ import { FC } from 'react';
 import { picker } from '../../../styles/theme/colors';
 import { ColorPickerColor, ColorPickerContainer, SectionTitle } from './styles';
 
-export interface ColorPickerProps {
+export interface IColorPickerProps {
   color: string;
   setColor: (newValue: string) => void;
 }
 
-const ColorPicker: FC<ColorPickerProps> = ({ color, setColor }) => {
+const ColorPicker: FC<IColorPickerProps> = ({ color, setColor }) => {
   return (
     <div>
       <SectionTitle>Color</SectionTitle>

@@ -1,11 +1,11 @@
 import mongoose, { Document, Schema, model } from 'mongoose';
 
-export interface Project extends Document {
+export interface IProject extends Document {
   name: string;
   color: string;
 }
 
-const projectSchema = new Schema<Project>(
+const projectSchema = new Schema<IProject>(
   {
     name: { required: true, index: true, type: String },
     color: { required: true, type: String },
@@ -14,4 +14,4 @@ const projectSchema = new Schema<Project>(
 );
 
 export default mongoose.models.Project ||
-  model<Project>('Project', projectSchema, 'projects');
+  model<IProject>('Project', projectSchema, 'projects');

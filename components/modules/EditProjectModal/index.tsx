@@ -2,22 +2,26 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 
 import useEditProject from '../../../hooks/mutations/useEditProject';
 import useInput from '../../../hooks/useInput';
-import { Project } from '../../../models/project';
+import { IProject } from '../../../models/project';
 import { picker } from '../../../styles/theme/colors';
 import Button from '../../elements/Button';
 import Input from '../../elements/Input';
 import Modal, {
+  IModalProps,
   ModalColorPicker,
   ModalFooter,
-  ModalProps,
   ModalTitle,
 } from '../../templates/Modal';
 
-interface Props extends ModalProps {
-  project?: Project;
+export interface IEditProjectIModalProps extends IModalProps {
+  project?: IProject;
 }
 
-const EditProjectModal: FC<Props> = ({ show, onHide, project }) => {
+const EditProjectModal: FC<IEditProjectIModalProps> = ({
+  show,
+  onHide,
+  project,
+}) => {
   const [name, handleOnChangeName, setName] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const { mutate: editProject } = useEditProject(project);

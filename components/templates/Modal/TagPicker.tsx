@@ -4,12 +4,12 @@ import useTags from '../../../hooks/queries/useTags';
 import Radial from '../../elements/Radial';
 import { SectionTitle, TagPickerContainer, TagPickerTag } from './styles';
 
-export interface TagPickerProps {
+export interface ITagPickerProps {
   tags: string[];
   setTags: (newValue: string[]) => void;
 }
 
-const TagPicker: FC<TagPickerProps> = ({ tags, setTags }) => {
+const TagPicker: FC<ITagPickerProps> = ({ tags, setTags }) => {
   const { data: allTags } = useTags();
 
   const hasTag = (id: string) => {

@@ -6,13 +6,13 @@ import { picker } from '../../../styles/theme/colors';
 import Button from '../../elements/Button';
 import Input from '../../elements/Input';
 import Modal, {
+  IModalProps,
   ModalColorPicker,
   ModalFooter,
-  ModalProps,
   ModalTitle,
 } from '../../templates/Modal';
 
-const AddProjectModal: FC<ModalProps> = ({ show, onHide }) => {
+const AddProjectModal: FC<IModalProps> = ({ show, onHide }) => {
   const [name, handleOnChangeName, setName] = useInput('');
   const [color, setColor] = useState(picker[0]);
   const { mutate: createProject } = useCreateProject();
@@ -29,7 +29,12 @@ const AddProjectModal: FC<ModalProps> = ({ show, onHide }) => {
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Add new project</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input required placeholder="Name" value={name} onChange={handleOnChangeName} />
+        <Input
+          required
+          placeholder="Name"
+          value={name}
+          onChange={handleOnChangeName}
+        />
         <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>

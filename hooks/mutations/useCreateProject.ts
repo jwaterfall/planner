@@ -1,16 +1,16 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { Project } from '../../models/project';
+import { IProject } from '../../models/project';
 
-interface NewProject {
+export interface INewProject {
   name: string;
   color: string;
 }
 
-async function createProject(newProject: NewProject) {
+async function createProject(newProject: INewProject) {
   const { origin } = window.location;
-  const response = await axios.put<Project>(
+  const response = await axios.put<IProject>(
     `${origin}/api/projects`,
     newProject,
   );
@@ -19,8 +19,8 @@ async function createProject(newProject: NewProject) {
   return project;
 }
 
-function updateQueryCache(queryClient: QueryClient, createdProject: Project) {
-  const previousProjects = queryClient.getQueryData<Project[]>('projects');
+function updateQueryCache(queryClient: QueryClient, createdProject: IProject) {
+  const previousProjects = queryClient.getQueryData<IProject[]>('projects');
 
   if (!previousProjects) return;
 
@@ -30,7 +30,7 @@ function updateQueryCache(queryClient: QueryClient, createdProject: Project) {
 function useCreateProject() {
   const queryClient = useQueryClient();
 
-  return useMutation((newProject: NewProject) => createProject(newProject), {
+  return useMutation((newProject: INewProject) => createProject(newProject), {
     onSuccess: (createdProject) =>
       updateQueryCache(queryClient, createdProject),
   });

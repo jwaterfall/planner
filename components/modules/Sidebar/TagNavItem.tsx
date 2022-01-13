@@ -6,17 +6,17 @@ import {
 } from 'react-icons/hi';
 
 import useDeleteTag from '../../../hooks/mutations/useDeleteTag';
-import { Tag } from '../../../models/tag';
+import { ITag } from '../../../models/tag';
 import NavLink from '../../elements/NavLink';
 import { DropdownItem, DropdownMenu } from '../../templates/Dropdown';
 import EditTagModal from '../EditTagModal';
 import { CollapsibleArrowIcon, ColorIcon, DropdownNavItem } from './styles';
 
-interface TagProps {
-  tag: Tag;
+export interface ITagProps {
+  tag: ITag;
 }
 
-const TagNavItem: FC<TagProps> = ({ tag }) => {
+const TagNavItem: FC<ITagProps> = ({ tag }) => {
   const [dropdownVisivbility, setDropdownVisibility] = useState(false);
   const [editModalVisibility, setEditModalVisibility] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);

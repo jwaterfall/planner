@@ -2,19 +2,19 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 
 import useEditTag from '../../../hooks/mutations/useEditTag';
 import useInput from '../../../hooks/useInput';
-import { Tag } from '../../../models/tag';
+import { ITag } from '../../../models/tag';
 import { picker } from '../../../styles/theme/colors';
 import Button from '../../elements/Button';
 import Input from '../../elements/Input';
 import Modal, {
+  IModalProps,
   ModalColorPicker,
   ModalFooter,
-  ModalProps,
   ModalTitle,
 } from '../../templates/Modal';
 
-interface Props extends ModalProps {
-  tag?: Tag;
+export interface IEditTagModalProps extends IModalProps {
+  tag?: ITag;
 }
 
 const EditTagModal: FC<Props> = ({ show, onHide, tag }) => {

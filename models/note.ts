@@ -1,33 +1,33 @@
 import mongoose, { Document, Schema, model } from 'mongoose';
 
-import { Project } from './project';
-import { Tag } from './tag';
+import { IProject } from './project';
+import { ITag } from './tag';
 
-export interface BaseNote extends Document {
+export interface IBaseNote extends Document {
   title: string;
   color: string;
   date: Date;
-  tags: Tag[];
+  tags: ITag[];
   reminder?: Date;
-  project?: Project;
+  project?: IProject;
 }
 
-export interface DefaultNote extends BaseNote {
-  type: 'default';
+export interface IDefaultNote extends IBaseNote {
+  variant: 'default';
   description: string;
 }
 
-export interface ChecklistNote extends BaseNote {
-  type: 'checklist';
+export interface IChecklistNote extends IBaseNote {
+  variant: 'checklist';
   items: { item: string; completed: boolean }[];
 }
 
-export type Note = DefaultNote | ChecklistNote;
+export type INote = IDefaultNote | IChecklistNote;
 
-const noteSchema = new Schema<Note>(
+const noteSchema = new Schema<INote>(
   {
     title: { required: true, index: true, type: String },
-    type: { required: true, type: String },
+    variant: { required: true, type: String },
     color: { required: true, type: String },
     date: { required: true, type: Date },
     tags: { required: true, type: [Schema.Types.ObjectId], ref: 'Tag' },
@@ -39,4 +39,5 @@ const noteSchema = new Schema<Note>(
   { versionKey: false },
 );
 
-export default mongoose.models.Note || model<Note>('Note', noteSchema, 'notes');
+export default mongoose.models.Note ||
+  model<INote>('Note', noteSchema, 'notes');

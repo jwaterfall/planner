@@ -1,18 +1,18 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { Tag } from '../../models/tag';
+import { ITag } from '../../models/tag';
 
 async function deleteTag(id: string) {
   const { origin } = window.location;
-  const response = await axios.delete<Tag>(`${origin}/api/tags/${id}`);
+  const response = await axios.delete<ITag>(`${origin}/api/tags/${id}`);
 
   const tag = response.data;
   return tag;
 }
 
-function updateQueryCache(queryClient: QueryClient, deletedTag: Tag) {
-  const previousTags = queryClient.getQueryData<Tag[]>('tags');
+function updateQueryCache(queryClient: QueryClient, deletedTag: ITag) {
+  const previousTags = queryClient.getQueryData<ITag[]>('tags');
 
   if (!previousTags) return;
 
@@ -22,7 +22,7 @@ function updateQueryCache(queryClient: QueryClient, deletedTag: Tag) {
   );
 }
 
-function useDeleteTag(tag: Tag) {
+function useDeleteTag(tag: ITag) {
   const queryClient = useQueryClient();
 
   return useMutation(() => deleteTag(tag._id), {

@@ -4,12 +4,12 @@ import Masonry from 'react-masonry-css';
 import useNotes from '../../../hooks/queries/useNotes';
 import Note from '../../modules/Note';
 
-interface NoteListProps {
+export interface INoteListProps {
   tagId?: string;
   projectId?: string;
 }
 
-const NoteList: FC<NoteListProps> = ({ tagId, projectId }) => {
+const NoteList: FC<INoteListProps> = ({ tagId, projectId }) => {
   const { data: notes } = useNotes(projectId);
 
   const filteredNotes = !tagId

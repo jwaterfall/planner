@@ -10,14 +10,13 @@ export const ModalFooter = Footer;
 export const ModalColorPicker = ColorPicker;
 export const ModalTagPicker = TagPicker;
 
-export interface ModalProps {
+export interface IModalProps {
   show: boolean;
   onHide: () => void;
 }
 
-const Modal: FC<ModalProps> = ({ show, onHide, children }) => {
+const Modal: FC<IModalProps> = ({ show, onHide, children }) => {
   const ref = useRef();
-
   useOnClickOutside(ref, onHide);
 
   return show ? (

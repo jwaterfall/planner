@@ -1,23 +1,23 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { Tag } from '../../models/tag';
+import { ITag } from '../../models/tag';
 
-interface NewTag {
+export interface INewTag {
   name: string;
   color: string;
 }
 
-async function createTag(newTag: NewTag) {
+async function createTag(newTag: INewTag) {
   const { origin } = window.location;
-  const response = await axios.put<Tag>(`${origin}/api/tags`, newTag);
+  const response = await axios.put<ITag>(`${origin}/api/tags`, newTag);
 
   const tag = response.data;
   return tag;
 }
 
-function updateQueryCache(queryClient: QueryClient, createdTag: Tag) {
-  const previousTags = queryClient.getQueryData<Tag[]>('tags');
+function updateQueryCache(queryClient: QueryClient, createdTag: ITag) {
+  const previousTags = queryClient.getQueryData<ITag[]>('tags');
 
   if (!previousTags) return;
 
@@ -27,7 +27,7 @@ function updateQueryCache(queryClient: QueryClient, createdTag: Tag) {
 function useCreateTag() {
   const queryClient = useQueryClient();
 
-  return useMutation((newTag: NewTag) => createTag(newTag), {
+  return useMutation((newTag: INewTag) => createTag(newTag), {
     onSuccess: (createdTag) => updateQueryCache(queryClient, createdTag),
   });
 }

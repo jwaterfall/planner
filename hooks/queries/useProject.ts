@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-import { Project } from '../../models/project';
+import { IProject } from '../../models/project';
 
 const getProject = async (id: string) => {
   const { origin } = window.location;
@@ -12,6 +12,6 @@ const getProject = async (id: string) => {
 };
 
 const useProject = (id: string) =>
-  useQuery<Project | undefined>(['project', id], () => getProject(id));
+  useQuery<IProject | undefined>(['project', id], () => getProject(id));
 
 export default useProject;

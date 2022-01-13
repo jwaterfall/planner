@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-import { Tag } from '../../models/tag';
+import { ITag } from '../../models/tag';
 
 const getTag = async (id: string) => {
   const { origin } = window.location;
@@ -12,6 +12,6 @@ const getTag = async (id: string) => {
 };
 
 const useTag = (id: string) =>
-  useQuery<Tag | undefined>(['tag', id], () => getTag(id));
+  useQuery<ITag | undefined>(['tag', id], () => getTag(id));
 
 export default useTag;

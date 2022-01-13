@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { Note } from '../../models/note';
+import { INote } from '../../models/note';
 
-export interface NewBaseNote {
+export interface INewBaseNote {
   title: string;
   color: string;
   tags: string[];
@@ -11,31 +11,31 @@ export interface NewBaseNote {
   project?: string;
 }
 
-export interface NewDefaultNote extends NewBaseNote {
-  type: 'default';
+export interface INewDefaultNote extends INewBaseNote {
+  variant: 'default';
   description: string;
 }
 
-export interface NewChecklistNote extends NewBaseNote {
-  type: 'checklist';
+export interface INewChecklistNote extends INewBaseNote {
+  variant: 'checklist';
   items: { item: string; completed: boolean }[];
 }
 
-export type NewNote = NewDefaultNote | NewChecklistNote;
+export type TNewNote = INewDefaultNote | INewChecklistNote;
 
-async function createNote(newNote: NewNote) {
+async function createNote(newNote: TNewNote) {
   const { origin } = window.location;
-  const response = await axios.put<Note>(`${origin}/api/notes`, newNote);
+  const response = await axios.put<INote>(`${origin}/api/notes`, newNote);
 
   const createdNote = response.data;
   return createdNote;
 }
 
-function updateQueryCache(queryClient: QueryClient, createdNote: Note) {
+function updateQueryCache(queryClient: QueryClient, createdNote: INote) {
   const projectId = createdNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
 
-  const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
+  const previousNotes = queryClient.getQueryData<INote[]>(queryKey);
 
   if (!previousNotes) return;
 
@@ -45,7 +45,7 @@ function updateQueryCache(queryClient: QueryClient, createdNote: Note) {
 function useCreateNote() {
   const queryClient = useQueryClient();
 
-  return useMutation((newNote: NewNote) => createNote(newNote), {
+  return useMutation((newNote: TNewNote) => createNote(newNote), {
     onSuccess: (createdNote) => updateQueryCache(queryClient, createdNote),
   });
 }

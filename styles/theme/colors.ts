@@ -1,7 +1,7 @@
 import theme from 'styled-theming';
 
 export const shadow = theme('mode', {
-  light: 'hsla(0, 0%, 0%, 0.25)',
+  light: 'hsla(0, 0%, 0%, 0.05)',
   dark: 'hsla(0, 0%, 0%, 0.25)',
 });
 

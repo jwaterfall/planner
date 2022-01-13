@@ -1,51 +1,23 @@
-import { FC, useState } from 'react';
-import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
+import { FC } from 'react';
 
-import useDeleteNote from '../../../hooks/mutations/useDeleteNote';
-import { Note } from '../../../models/note';
-import EditNoteModal from '../../modules/EditNoteModal';
-import { Body, Card, Tag, Tags, Title, Toolbar } from './styles';
+import { INote } from '../../../models/note';
+import DefaultNote from './DefaultNote';
+import ModalNote from './ModalNote';
 
-export interface NoteProps {
-  note: Note;
+export interface INoteProps {
+  note: INote;
+  variant?: 'default' | 'modal';
 }
 
-const NoteComponent: FC<NoteProps> = ({ note }) => {
-  const [modalVisibility, setModalVisibility] = useState(false);
-  const { mutate: deleteNote } = useDeleteNote(note);
-
-  switch (note.type) {
+const Note: FC<INoteProps> = ({ note, variant = 'default' }) => {
+  switch (variant) {
     case 'default':
-      return (
-        <>
-          <EditNoteModal
-            show={modalVisibility}
-            onHide={() => setModalVisibility(false)}
-            note={note}
-          />
-
-          <Card color={note.color}>
-            {note.title && <Title>{note.title}</Title>}
-            <Body>{note.description}</Body>
-            {note.tags.length > 0 && (
-              <Tags>
-                {note.tags.map((tag) => (
-                  <Tag key={tag._id} color={tag.color}>
-                    {tag.name}
-                  </Tag>
-                ))}
-              </Tags>
-            )}
-            <Toolbar>
-              <HiOutlinePencil onClick={() => setModalVisibility(true)} />
-              <HiOutlineTrash onClick={() => deleteNote()} />
-            </Toolbar>
-          </Card>
-        </>
-      );
+      return <DefaultNote note={note} />;
+    case 'modal':
+      return <ModalNote note={note} />;
     default:
       return <></>;
   }
 };
 
-export default NoteComponent;
+export default Note;
