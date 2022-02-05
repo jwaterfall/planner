@@ -30,7 +30,7 @@ const ProjectNavItem: FC<IProjectProps> = ({ project }) => {
         project={project}
       />
       <NavLink href={`/projects/${project._id}`} key={project._id}>
-        <DropdownNavItem>
+        <DropdownNavItem data-testid="ProjectNavItem">
           <ColorIcon color={project.color} />
           {project.name}
           <CollapsibleArrowIcon ref={setReferenceElement}>

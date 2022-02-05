@@ -15,16 +15,14 @@ export interface IModalProps {
   onHide: () => void;
 }
 
-const Modal: FC<IModalProps> = ({ show, onHide, children }) => {
+const Modal: FC<IModalProps> = ({ show, onHide, children, ...props }) => {
   const ref = useRef();
   useOnClickOutside(ref, onHide);
 
-  return show ? (
-    <Container>
+  return (
+    <Container show={show} {...props}>
       <Content ref={ref}>{children}</Content>
     </Container>
-  ) : (
-    <></>
   );
 };
 

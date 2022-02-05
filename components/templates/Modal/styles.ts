@@ -11,7 +11,7 @@ import {
 } from '../../../styles/theme/colors';
 import { weight2, weight3 } from '../../../styles/theme/font';
 
-export const Container = styled.div`
+export const Container = styled.div<{ show: boolean }>`
   width: 100%;
   height: 100vh;
   position: fixed;
@@ -19,7 +19,7 @@ export const Container = styled.div`
   left: 0;
   z-index: 105;
   background: hsla(0, 0%, 0%, 0.5);
-  display: flex;
+  display: ${(props) => (props.show ? 'flex' : 'none')};
   align-items: center;
   justify-content: center;
 `;

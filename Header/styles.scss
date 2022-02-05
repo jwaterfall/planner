@@ -1,0 +1,18 @@
+.header {
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 1rem;
+  font-family: var(--font-family);
+  letter-spacing: 0.025rem;
+  text-transform: capitalize;
+  line-height: 1;
+  margin: 0;
+}
+
+.header-secondary {
+  color: var(--secondary-color);
+}
+
+.header-tertiary {
+  color: var(--tertiary-color);
+}

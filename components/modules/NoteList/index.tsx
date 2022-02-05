@@ -10,7 +10,7 @@ export interface INoteListProps {
 }
 
 const NoteList: FC<INoteListProps> = ({ tagId, projectId }) => {
-  const { data: notes } = useNotes(projectId);
+  const { data: notes, is } = useNotes(projectId);
 
   const filteredNotes = !tagId
     ? notes

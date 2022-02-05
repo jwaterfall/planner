@@ -9,7 +9,7 @@ export interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: FC<IButtonProps> = ({ variant = 'primary', ...props }) => {
   switch (variant) {
     case 'primary':
-      return <PrimaryButton {...props} />;
+      return <PrimaryButton  {...props} />;
     case 'secondary':
       return <SecondaryButton {...props} />;
   }

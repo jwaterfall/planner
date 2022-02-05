@@ -1,0 +1,38 @@
+.button {
+  max-width: 15rem;
+  color: var(--primary-color);
+  background: var(--button-bg-color);
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.875rem;
+  font-family: var(--font-family);
+  letter-spacing: 0.025rem;
+  text-transform: uppercase;
+  line-height: 1;
+  margin: 0;
+  outline: 0;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  border: 0.125rem solid var(--primary-color);
+  transition: background 150ms;
+  &:hover {
+    color: var(--button-text-hover);
+    background: var(--button-bg-color-hover);
+  }
+}
+
+.button-secondary {
+  color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  &:hover {
+    color: var(--button-text-secondary-hover);
+  }
+}
+
+.button-tertiary {
+  color: var(--tertiary-color);
+  border-color: var(--tertiary-color);
+  &:hover {
+    color: var(--button-text-tertiary-hover);
+  }
+}

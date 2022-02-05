@@ -30,7 +30,7 @@ const TagNavItem: FC<ITagProps> = ({ tag }) => {
         tag={tag}
       />
       <NavLink href={`/tags/${tag._id}`} key={tag._id}>
-        <DropdownNavItem>
+        <DropdownNavItem data-testid="TagNavItem">
           <ColorIcon color={tag.color} />
           {tag.name}
           <CollapsibleArrowIcon ref={setReferenceElement}>

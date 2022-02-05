@@ -26,7 +26,7 @@ const AddTagModal: FC<IModalProps> = ({ show, onHide }) => {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={onHide} data-testid="AddTagModal">
       <ModalTitle>Add new tag</ModalTitle>
       <form onSubmit={handleSubmit}>
         <Input
@@ -34,13 +34,14 @@ const AddTagModal: FC<IModalProps> = ({ show, onHide }) => {
           placeholder="Name"
           value={name}
           onChange={handleOnChangeName}
+          data-testid="AddTagModalNameInput"
         />
         <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>
             Cancel
           </Button>
-          <Button>Add</Button>
+          <Button data-testid="AddTagModalAddButton">Add</Button>
         </ModalFooter>
       </form>
     </Modal>

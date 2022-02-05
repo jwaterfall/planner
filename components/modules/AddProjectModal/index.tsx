@@ -26,7 +26,7 @@ const AddProjectModal: FC<IModalProps> = ({ show, onHide }) => {
   }
 
   return (
-    <Modal show={show} onHide={onHide}>
+    <Modal show={show} onHide={onHide} data-testid="AddProjectModal">
       <ModalTitle>Add new project</ModalTitle>
       <form onSubmit={handleSubmit}>
         <Input
@@ -34,13 +34,14 @@ const AddProjectModal: FC<IModalProps> = ({ show, onHide }) => {
           placeholder="Name"
           value={name}
           onChange={handleOnChangeName}
+          data-testid="AddProjectModalNameInput"
         />
         <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>
             Cancel
           </Button>
-          <Button>Add</Button>
+          <Button data-testid="AddProjectModalAddButton">Add</Button>
         </ModalFooter>
       </form>
     </Modal>
