@@ -1,25 +1,33 @@
 import styled from 'styled-components';
 
-import { primary, primaryHover, shadow, textButton } from '../../../styles/theme/colors';
+import {
+  buttonPrimaryHover,
+  buttonSecondaryHover,
+  primary,
+  secondary,
+} from '../../../styles/theme/colors';
 
 export const PrimaryButton = styled.button`
-  background: ${primary};
-  outline: 0;
-  border: 0;
-  font-size: 0.875rem;
-  color: ${textButton};
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  margin: 0;
+  color: ${primary};
+  background: none;
+  border: 1px solid ${primary};
+  border-radius: 0.25rem;
+  text-decoration: none;
   cursor: pointer;
-  border: 0.125rem solid ${primary};
-  transition: all 150ms;
-  box-shadow: 0 0 0.5rem ${shadow};
+  transition: 150ms all;
+  font-size: 0.9rem;
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
   &:hover {
-    background: ${primaryHover};
-    border-color: ${primaryHover};
+    background: ${buttonPrimaryHover};
   }
 `;
 
 export const SecondaryButton = styled(PrimaryButton)`
-  background: transparent;
+  color: ${secondary};
+  border-color: ${secondary};
+  &:hover {
+    background: ${buttonSecondaryHover};
+  }
 `;

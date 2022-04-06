@@ -61,13 +61,23 @@ export const foreground = theme('mode', {
 });
 
 export const primary = theme('mode', {
-  light: '#ec368d',
-  dark: '#ec368d',
+  light: '#00CC99',
+  dark: '#00CC99',
 });
 
-export const primaryHover = theme('mode', {
-  light: '#c61268',
-  dark: '#c61268',
+export const secondary = theme('mode', {
+  light: '#df205b',
+  dark: '#df205b',
+});
+
+export const buttonPrimaryHover = theme('mode', {
+  light: '#00BD9D25',
+  dark: '#00BD9D25',
+});
+
+export const buttonSecondaryHover = theme('mode', {
+  light: '#CC336325',
+  dark: '#CC336325',
 });
 
 export const picker = [
