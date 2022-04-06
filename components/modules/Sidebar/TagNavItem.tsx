@@ -1,22 +1,18 @@
 import React, { FC, useState } from 'react';
-import {
-  HiDotsVertical,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from 'react-icons/hi';
+import { HiDotsVertical, HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 
 import useDeleteTag from '../../../hooks/mutations/useDeleteTag';
-import { ITag } from '../../../models/tag';
+import { Tag } from '../../../models/tag';
 import NavLink from '../../elements/NavLink';
 import { DropdownItem, DropdownMenu } from '../../templates/Dropdown';
 import EditTagModal from '../EditTagModal';
 import { CollapsibleArrowIcon, ColorIcon, DropdownNavItem } from './styles';
 
-export interface ITagProps {
-  tag: ITag;
+export interface TagProps {
+  tag: Tag;
 }
 
-const TagNavItem: FC<ITagProps> = ({ tag }) => {
+const TagNavItem: FC<TagProps> = ({ tag }) => {
   const [dropdownVisivbility, setDropdownVisibility] = useState(false);
   const [editModalVisibility, setEditModalVisibility] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);

@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-import { INote } from '../../../models/note';
+import { Note } from '../../../models/note';
 import { Tag, TagsContainer } from './styles';
 
-interface ITagsProps {
-  note: INote;
+interface TagsProps {
+  note: Note;
 }
 
-const Tags: FC<ITagsProps> = ({ note }) => (
+const Tags: FC<TagsProps> = ({ note }) => (
   <TagsContainer>
     {note.tags.map((tag) => (
       <Tag key={tag._id} color={tag.color}>

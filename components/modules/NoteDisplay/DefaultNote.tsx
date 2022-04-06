@@ -1,13 +1,13 @@
 import { FC, useState } from 'react';
 
-import { INote } from '../../../models/note';
+import { Note } from '../../../models/note';
 import ViewNoteModal from '../ViewNoteModal';
 import Tags from './Tags';
 import Toolbar from './Toolbar';
 import { Body, Card, Fade, Title } from './styles';
 
 export interface IDefaultNoteProps {
-  note: INote;
+  note: Note;
 }
 
 const DefaultNote: FC<IDefaultNoteProps> = ({ note }) => {

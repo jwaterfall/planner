@@ -1,15 +1,15 @@
 import { FC } from 'react';
 
-import { INote } from '../../../models/note';
+import { Note } from '../../../models/note';
 import DefaultNote from './DefaultNote';
 import ModalNote from './ModalNote';
 
-export interface INoteProps {
-  note: INote;
+export interface NoteProps {
+  note: Note;
   variant?: 'default' | 'modal';
 }
 
-const Note: FC<INoteProps> = ({ note, variant = 'default' }) => {
+const NoteDisplay: FC<NoteProps> = ({ note, variant = 'default' }) => {
   switch (variant) {
     case 'default':
       return <DefaultNote note={note} />;
@@ -20,4 +20,4 @@ const Note: FC<INoteProps> = ({ note, variant = 'default' }) => {
   }
 };
 
-export default Note;
+export default NoteDisplay;

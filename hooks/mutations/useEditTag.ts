@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { ITag } from '../../models/tag';
+import { Tag } from '../../models/tag';
 
 export interface Changes {
   name?: string;
@@ -10,14 +10,14 @@ export interface Changes {
 
 async function editTag(id: string, changes: Changes) {
   const { origin } = window.location;
-  const response = await axios.patch<ITag>(`${origin}/api/tags/${id}`, changes);
+  const response = await axios.patch<Tag>(`${origin}/api/tags/${id}`, changes);
 
   const tag = response.data;
   return tag;
 }
 
-function updateQueryCache(queryClient: QueryClient, updatedTag: ITag) {
-  const previousTags = queryClient.getQueryData<ITag[]>('tags');
+function updateQueryCache(queryClient: QueryClient, updatedTag: Tag) {
+  const previousTags = queryClient.getQueryData<Tag[]>('tags');
 
   if (!previousTags) return;
 
@@ -27,7 +27,7 @@ function updateQueryCache(queryClient: QueryClient, updatedTag: ITag) {
   );
 }
 
-function useEditTag(tag: ITag) {
+function useEditTag(tag: Tag) {
   const queryClient = useQueryClient();
 
   return useMutation((changes: Changes) => editTag(tag._id, changes), {

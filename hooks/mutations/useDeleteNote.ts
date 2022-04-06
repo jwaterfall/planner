@@ -1,21 +1,21 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { INote } from '../../models/note';
+import { Note } from '../../models/note';
 
 async function deleteNote(id: string) {
   const { origin } = window.location;
-  const response = await axios.delete<INote>(`${origin}/api/notes/${id}`);
+  const response = await axios.delete<Note>(`${origin}/api/notes/${id}`);
 
   const deletedNote = response.data;
   return deletedNote;
 }
 
-function updateQueryCache(queryClient: QueryClient, deletedNote: INote) {
+function updateQueryCache(queryClient: QueryClient, deletedNote: Note) {
   const projectId = deletedNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
 
-  const previousNotes = queryClient.getQueryData<INote[]>(queryKey);
+  const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
 
   if (!previousNotes) return;
 
@@ -25,7 +25,7 @@ function updateQueryCache(queryClient: QueryClient, deletedNote: INote) {
   );
 }
 
-function useDeleteNote(note: INote) {
+function useDeleteNote(note: Note) {
   const queryClient = useQueryClient();
 
   return useMutation(() => deleteNote(note._id), {

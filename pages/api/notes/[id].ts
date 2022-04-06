@@ -1,19 +1,27 @@
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
-import Note from '../../../models/note';
-import Project from '../../../models/project';
-import Tag from '../../../models/tag';
+import NoteModel from '../../../models/note';
+import ProjectModel from '../../../models/project';
+import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
+  const { user } = getSession(req, res);
+
+  const note = await NoteModel.findById(id)
+    .populate({ path: 'tags', model: TagModel })
+    .populate({ path: 'project', model: ProjectModel });
+
+  if (note.author !== user.sub) {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
 
   switch (req.method) {
     case 'PATCH':
       try {
-        const note = await Note.findByIdAndUpdate(id, req.body, { new: true })
-          .populate({ path: 'tags', model: Tag })
-          .populate({ path: 'project', model: Project });
+        await note.updateOne(req.body);
 
         res.json(note);
       } catch (err) {
@@ -22,9 +30,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'DELETE':
       try {
-        const note = await Note.findByIdAndDelete(id)
-          .populate({ path: 'tags', model: Tag })
-          .populate({ path: 'project', model: Project });
+        note.deleteOne();
 
         res.json(note);
       } catch (err) {
@@ -37,4 +43,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectToDatabase(handler);
+export default connectToDatabase(withApiAuthRequired(handler) );

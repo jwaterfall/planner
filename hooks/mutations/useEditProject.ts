@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { IProject } from '../../models/project';
+import { Project } from '../../models/project';
 
 export interface IChanges {
   name?: string;
@@ -10,17 +10,14 @@ export interface IChanges {
 
 async function editProject(id: string, changes: IChanges) {
   const { origin } = window.location;
-  const response = await axios.patch<IProject>(
-    `${origin}/api/projects/${id}`,
-    changes,
-  );
+  const response = await axios.patch<Project>(`${origin}/api/projects/${id}`, changes);
 
   const project = response.data;
   return project;
 }
 
-function updateQueryCache(queryClient: QueryClient, updatedProject: IProject) {
-  const previousProjects = queryClient.getQueryData<IProject[]>('projects');
+function updateQueryCache(queryClient: QueryClient, updatedProject: Project) {
+  const previousProjects = queryClient.getQueryData<Project[]>('projects');
 
   if (!previousProjects) return;
 
@@ -32,12 +29,11 @@ function updateQueryCache(queryClient: QueryClient, updatedProject: IProject) {
   );
 }
 
-function useEditProject(project: IProject) {
+function useEditProject(project: Project) {
   const queryClient = useQueryClient();
 
   return useMutation((changes: IChanges) => editProject(project._id, changes), {
-    onSuccess: (updatedProject) =>
-      updateQueryCache(queryClient, updatedProject),
+    onSuccess: (updatedProject) => updateQueryCache(queryClient, updatedProject),
   });
 }
 

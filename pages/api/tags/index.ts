@@ -1,13 +1,16 @@
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
-import Tag from '../../../models/tag';
+import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { user } = getSession(req, res);
+
   switch (req.method) {
     case 'GET':
       try {
-        const tags = await Tag.find();
+        const tags = await TagModel.find({ author: user.sub });
 
         res.json(tags);
       } catch (err) {
@@ -16,7 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'PUT':
       try {
-        const tag = new Tag(req.body);
+        const tag = new TagModel({ ...req.body, author: user.sub });
 
         await tag.save();
         res.json(tag);
@@ -30,4 +33,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectToDatabase(handler);
+export default connectToDatabase(withApiAuthRequired(handler));

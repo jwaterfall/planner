@@ -21,6 +21,12 @@ const Topbar: FC<ITopbarProps> = ({ title, projectId }) => {
       />
       <Container>
         <Button onClick={() => setModalVisibility(true)}>Add Note</Button>
+        {
+          // eslint-disable-next-line
+          <a href="/api/auth/logout">
+            <Button>Sign Out</Button>
+          </a>
+        }
         <Title>{title}</Title>
       </Container>
     </>

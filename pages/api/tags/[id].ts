@@ -1,16 +1,22 @@
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
-import Tag from '../../../models/tag';
+import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
+  const { user } = getSession(req, res);
+
+  const tag = await TagModel.findById(id);
+
+  if (tag.author !== user.sub) {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
 
   switch (req.method) {
     case 'GET':
       try {
-        const tag = await Tag.findById(id);
-
         res.json(tag);
       } catch (err) {
         res.status(500).json({ error: (err as Error).message });
@@ -18,7 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'PATCH':
       try {
-        const tag = await Tag.findByIdAndUpdate(id, req.body, { new: true });
+        await tag.updateOne(req.body);
 
         res.json(tag);
       } catch (err) {
@@ -27,7 +33,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'DELETE':
       try {
-        const tag = await Tag.findByIdAndDelete(id);
+        await tag.deleteOne();
 
         res.json(tag);
       } catch (err) {
@@ -40,4 +46,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectToDatabase(handler);
+export default connectToDatabase(withApiAuthRequired(handler));

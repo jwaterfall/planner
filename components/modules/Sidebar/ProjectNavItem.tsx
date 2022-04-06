@@ -1,22 +1,18 @@
 import React, { FC, useState } from 'react';
-import {
-  HiDotsVertical,
-  HiOutlinePencil,
-  HiOutlineTrash,
-} from 'react-icons/hi';
+import { HiDotsVertical, HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 
 import useDeleteProject from '../../../hooks/mutations/useDeleteProject';
-import { IProject } from '../../../models/project';
+import { Project } from '../../../models/project';
 import NavLink from '../../elements/NavLink';
 import { DropdownItem, DropdownMenu } from '../../templates/Dropdown';
 import EditProjectModal from '../EditProjectModal';
 import { CollapsibleArrowIcon, ColorIcon, DropdownNavItem } from './styles';
 
-export interface IProjectProps {
-  project: IProject;
+export interface ProjectProps {
+  project: Project;
 }
 
-const ProjectNavItem: FC<IProjectProps> = ({ project }) => {
+const ProjectNavItem: FC<ProjectProps> = ({ project }) => {
   const [dropdownVisivbility, setDropdownVisibility] = useState(false);
   const [editModalVisibility, setEditModalVisibility] = useState(false);
   const [referenceElement, setReferenceElement] = useState(null);

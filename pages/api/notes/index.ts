@@ -1,17 +1,20 @@
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
-import Note from '../../../models/note';
-import Project from '../../../models/project';
-import Tag from '../../../models/tag';
+import NoteModel from '../../../models/note';
+import ProjectModel from '../../../models/project';
+import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { user } = getSession(req, res);
+
   switch (req.method) {
     case 'GET':
       try {
-        const notes = await Note.find({ project: req.query.projectId })
-          .populate({ path: 'tags', model: Tag })
-          .populate({ path: 'project', model: Project });
+        const notes = await NoteModel.find({ author: user.sub, project: req.query.projectId })
+          .populate({ path: 'tags', model: TagModel })
+          .populate({ path: 'project', model: ProjectModel });
 
         res.json(notes);
       } catch (err) {
@@ -21,12 +24,12 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     case 'PUT':
       try {
         const date = new Date();
-        const note = new Note({ ...req.body, date });
+        const note = new NoteModel({ ...req.body, date, author: user.sub });
 
         await note.save();
 
-        await Note.populate(note, 'tags');
-        await Note.populate(note, 'project');
+        await NoteModel.populate(note, 'tags');
+        await NoteModel.populate(note, 'project');
 
         res.json(note);
       } catch (err) {
@@ -39,4 +42,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectToDatabase(handler);
+export default connectToDatabase(withApiAuthRequired(handler));

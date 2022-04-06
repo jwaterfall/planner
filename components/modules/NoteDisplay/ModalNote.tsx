@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
-import { INote } from '../../../models/note';
+import { Note } from '../../../models/note';
 import Tags from './Tags';
 import Toolbar from './Toolbar';
 import { ModalBody, ModalCard, Title } from './styles';
 
 export interface IModalNoteProps {
-  note: INote;
+  note: Note;
 }
 
 const ModalNote: FC<IModalNoteProps> = ({ note }) => {

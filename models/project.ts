@@ -1,17 +1,21 @@
-import mongoose, { Document, Schema, model } from 'mongoose';
+import mongoose, { Document, Model, Schema, model } from 'mongoose';
 
-export interface IProject extends Document {
+export interface Project extends Document {
+  author: string;
   name: string;
   color: string;
 }
 
-const projectSchema = new Schema<IProject>(
+const projectSchema = new Schema<Project>(
   {
+    author: { required: true, index: true, type: String },
     name: { required: true, index: true, type: String },
     color: { required: true, type: String },
   },
   { versionKey: false },
 );
 
-export default mongoose.models.Project ||
-  model<IProject>('Project', projectSchema, 'projects');
+const ProjectModel = (mongoose.models.Project ??
+  model<Project>('Project', projectSchema, 'projects')) as Model<Project>;
+
+export default ProjectModel;

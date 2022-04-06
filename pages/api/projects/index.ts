@@ -1,13 +1,16 @@
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
-import Project from '../../../models/project';
+import ProjectModel from '../../../models/project';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { user } = getSession(req, res);
+
   switch (req.method) {
     case 'GET':
       try {
-        const projects = await Project.find();
+        const projects = await ProjectModel.find({ author: user.sub });
 
         res.json(projects);
       } catch (err) {
@@ -16,7 +19,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'PUT':
       try {
-        const project = new Project(req.body);
+        const project = new ProjectModel({ ...req.body, author: user.sub });
 
         await project.save();
         res.json(project);
@@ -30,4 +33,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectToDatabase(handler);
+export default connectToDatabase(withApiAuthRequired(handler));
