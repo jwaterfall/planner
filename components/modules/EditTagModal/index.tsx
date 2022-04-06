@@ -2,7 +2,7 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 
 import useEditTag from '../../../hooks/mutations/useEditTag';
 import useInput from '../../../hooks/useInput';
-import { ITag } from '../../../models/tag';
+import { Tag } from '../../../models/tag';
 import { picker } from '../../../styles/theme/colors';
 import Button from '../../elements/Button';
 import Input from '../../elements/Input';
@@ -14,7 +14,7 @@ import Modal, {
 } from '../../templates/Modal';
 
 export interface IEditTagModalProps extends IModalProps {
-  tag?: ITag;
+  tag?: Tag;
 }
 
 const EditTagModal: FC<IEditTagModalProps> = ({ show, onHide, tag }) => {
@@ -37,12 +37,7 @@ const EditTagModal: FC<IEditTagModalProps> = ({ show, onHide, tag }) => {
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing tag</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input
-          required
-          placeholder="Name"
-          value={name}
-          onChange={handleOnChangeName}
-        />
+        <Input required placeholder="Name" value={name} onChange={handleOnChangeName} />
         <ModalColorPicker color={color} setColor={setColor} />
         <ModalFooter>
           <Button variant="secondary" type="button" onClick={onHide}>

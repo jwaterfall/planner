@@ -2,12 +2,12 @@ import { FC, MouseEvent, useState } from 'react';
 import { HiOutlinePencil, HiOutlineTrash } from 'react-icons/hi';
 
 import useDeleteNote from '../../../hooks/mutations/useDeleteNote';
-import { INote } from '../../../models/note';
+import { Note } from '../../../models/note';
 import EditNoteModal from '../EditNoteModal';
 import { ToolbarContainer } from './styles';
 
 interface IToolbarProps {
-  note: INote;
+  note: Note;
 }
 
 const Toolbar: FC<IToolbarProps> = ({ note }) => {
@@ -30,11 +30,7 @@ const Toolbar: FC<IToolbarProps> = ({ note }) => {
 
   return (
     <>
-      <EditNoteModal
-        show={editModalVisibility}
-        onHide={handleHideEditModal}
-        note={note}
-      />
+      <EditNoteModal show={editModalVisibility} onHide={handleHideEditModal} note={note} />
 
       <ToolbarContainer>
         <HiOutlinePencil onClick={handleEdit} />

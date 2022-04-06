@@ -1,16 +1,22 @@
+import { getSession, withApiAuthRequired } from '@auth0/nextjs-auth0';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
-import Project from '../../../models/project';
+import ProjectModel from '../../../models/project';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
+  const { user } = getSession(req, res);
+
+  const project = await ProjectModel.findById(id);
+
+  if (project.author !== user.sub) {
+    res.status(401).json({ error: 'Unauthorized' });
+  }
 
   switch (req.method) {
     case 'GET':
       try {
-        const project = await Project.findById(id);
-
         res.json(project);
       } catch (err) {
         res.status(500).json({ error: (err as Error).message });
@@ -18,9 +24,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'PATCH':
       try {
-        const project = await Project.findByIdAndUpdate(id, req.body, {
-          new: true,
-        });
+        await project.updateOne(req.body);
 
         res.json(project);
       } catch (err) {
@@ -29,7 +33,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
       break;
     case 'DELETE':
       try {
-        const project = await Project.findByIdAndDelete(id);
+        await project.deleteOne();
 
         res.json(project);
       } catch (err) {
@@ -42,4 +46,4 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
   }
 }
 
-export default connectToDatabase(handler);
+export default connectToDatabase(withApiAuthRequired(handler));

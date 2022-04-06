@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useQuery } from 'react-query';
 
-import { INote } from '../../models/note';
+import { Note } from '../../models/note';
 
 async function getNotes(projectId?: string) {
   const { origin } = window.location;
@@ -16,7 +16,7 @@ async function getNotes(projectId?: string) {
 function useNotes(projectId?: string) {
   const queryKey = projectId ? ['notes', projectId] : 'notes';
 
-  return useQuery<INote[]>(queryKey, () => getNotes(projectId));
+  return useQuery<Note[]>(queryKey, () => getNotes(projectId));
 }
 
 export default useNotes;

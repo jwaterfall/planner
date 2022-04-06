@@ -2,14 +2,14 @@ import { FC } from 'react';
 import Masonry from 'react-masonry-css';
 
 import useNotes from '../../../hooks/queries/useNotes';
-import Note from '../../modules/Note';
+import NoteDisplay from '../NoteDisplay';
 
-export interface INoteListProps {
+export interface NoteListProps {
   tagId?: string;
   projectId?: string;
 }
 
-const NoteList: FC<INoteListProps> = ({ tagId, projectId }) => {
+const NoteList: FC<NoteListProps> = ({ tagId, projectId }) => {
   const { data: notes } = useNotes(projectId);
 
   const filteredNotes = !tagId
@@ -35,7 +35,7 @@ const NoteList: FC<INoteListProps> = ({ tagId, projectId }) => {
       columnClassName="my-masonry-grid_column"
     >
       {filteredNotes?.map((note, index) => (
-        <Note note={note} key={index} />
+        <NoteDisplay note={note} key={index} />
       ))}
     </Masonry>
   );

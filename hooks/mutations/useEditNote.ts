@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { INote } from '../../models/note';
+import { Note } from '../../models/note';
 
 export interface IChanges {
   title?: string;
@@ -12,32 +12,27 @@ export interface IChanges {
 
 async function editNote(id: string, changes: IChanges) {
   const { origin } = window.location;
-  const response = await axios.patch<INote>(
-    `${origin}/api/notes/${id}`,
-    changes,
-  );
+  const response = await axios.patch<Note>(`${origin}/api/notes/${id}`, changes);
 
   const note = response.data;
   return note;
 }
 
-function updateQueryCache(queryClient: QueryClient, updatedNote: INote) {
+function updateQueryCache(queryClient: QueryClient, updatedNote: Note) {
   const projectId = updatedNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
 
-  const previousNotes = queryClient.getQueryData<INote[]>(queryKey);
+  const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
 
   if (!previousNotes) return;
 
   queryClient.setQueryData(
     queryKey,
-    previousNotes.map((note) =>
-      note._id === updatedNote._id ? updatedNote : note,
-    ),
+    previousNotes.map((note) => (note._id === updatedNote._id ? updatedNote : note)),
   );
 }
 
-const useEditNote = (note: INote) => {
+const useEditNote = (note: Note) => {
   const queryClient = useQueryClient();
 
   return useMutation((changes: IChanges) => editNote(note._id, changes), {

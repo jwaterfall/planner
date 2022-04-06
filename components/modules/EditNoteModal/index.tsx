@@ -2,7 +2,7 @@ import { FC, FormEvent, useEffect, useState } from 'react';
 
 import useEditNote from '../../../hooks/mutations/useEditNote';
 import useInput from '../../../hooks/useInput';
-import { INote } from '../../../models/note';
+import { Note } from '../../../models/note';
 import { picker } from '../../../styles/theme/colors';
 import Button from '../../elements/Button';
 import Input from '../../elements/Input';
@@ -16,7 +16,7 @@ import Modal, {
 } from '../../templates/Modal';
 
 export interface IEditNoteIModalProps extends IModalProps {
-  note?: INote;
+  note?: Note;
 }
 
 const EditNoteModal: FC<IEditNoteIModalProps> = ({ show, onHide, note }) => {
@@ -43,12 +43,7 @@ const EditNoteModal: FC<IEditNoteIModalProps> = ({ show, onHide, note }) => {
     <Modal show={show} onHide={onHide}>
       <ModalTitle>Edit existing note</ModalTitle>
       <form onSubmit={handleSubmit}>
-        <Input
-          required
-          placeholder="Name"
-          value={title}
-          onChange={handleOnChangeTitle}
-        />
+        <Input required placeholder="Name" value={title} onChange={handleOnChangeTitle} />
         <TextArea
           required
           placeholder="Description"

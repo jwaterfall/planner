@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { QueryClient, useMutation, useQueryClient } from 'react-query';
 
-import { INote } from '../../models/note';
+import { Note } from '../../models/note';
 
 export interface INewBaseNote {
   title: string;
@@ -25,17 +25,17 @@ export type TNewNote = INewDefaultNote | INewChecklistNote;
 
 async function createNote(newNote: TNewNote) {
   const { origin } = window.location;
-  const response = await axios.put<INote>(`${origin}/api/notes`, newNote);
+  const response = await axios.put<Note>(`${origin}/api/notes`, newNote);
 
   const createdNote = response.data;
   return createdNote;
 }
 
-function updateQueryCache(queryClient: QueryClient, createdNote: INote) {
+function updateQueryCache(queryClient: QueryClient, createdNote: Note) {
   const projectId = createdNote.project?._id;
   const queryKey = projectId ? ['notes', projectId] : 'notes';
 
-  const previousNotes = queryClient.getQueryData<INote[]>(queryKey);
+  const previousNotes = queryClient.getQueryData<Note[]>(queryKey);
 
   if (!previousNotes) return;
 

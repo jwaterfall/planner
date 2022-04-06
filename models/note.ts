@@ -1,15 +1,16 @@
-import mongoose, { Document, Schema, model } from 'mongoose';
+import mongoose, { Document, Model, Schema, model } from 'mongoose';
 
-import { IProject } from './project';
-import { ITag } from './tag';
+import { Project } from './project';
+import { Tag } from './tag';
 
 export interface IBaseNote extends Document {
+  author: string;
   title: string;
   color: string;
   date: Date;
-  tags: ITag[];
+  tags: Tag[];
   reminder?: Date;
-  project?: IProject;
+  project?: Project;
 }
 
 export interface IDefaultNote extends IBaseNote {
@@ -22,10 +23,11 @@ export interface IChecklistNote extends IBaseNote {
   items: { item: string; completed: boolean }[];
 }
 
-export type INote = IDefaultNote | IChecklistNote;
+export type Note = IDefaultNote | IChecklistNote;
 
-const noteSchema = new Schema<INote>(
+const noteSchema = new Schema<Note>(
   {
+    author: { required: true, index: true, type: String },
     title: { required: true, index: true, type: String },
     variant: { required: true, type: String },
     color: { required: true, type: String },
@@ -39,5 +41,6 @@ const noteSchema = new Schema<INote>(
   { versionKey: false },
 );
 
-export default mongoose.models.Note ||
-  model<INote>('Note', noteSchema, 'notes');
+const NoteModel = (mongoose.models.Note ?? model<Note>('Note', noteSchema, 'notes')) as Model<Note>;
+
+export default NoteModel;
