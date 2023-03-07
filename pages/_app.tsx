@@ -6,7 +6,8 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import { ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 
-import Layout from '../components/templates/Layout';
+import Navbar from '../components/Navbar';
+import '../globals.css';
 import GlobalStyle from '../styles/GlobalStyle';
 
 const queryClient = new QueryClient();
@@ -17,9 +18,12 @@ const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps) =>
       <ThemeProvider theme={{ mode: 'dark' }}>
         <Normalize />
         <GlobalStyle />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <div className="flex flex-col h-screen bg-neutral-900">
+          <div className="flex-grow overflow-y-auto">
+            <Component {...pageProps} />
+          </div>
+          <Navbar />
+        </div>
         <div id="menus" />
       </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
