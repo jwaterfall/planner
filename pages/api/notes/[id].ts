@@ -8,7 +8,7 @@ import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { id } = req.query;
-  const { user } = getSession(req, res);
+  const { user } = await getSession(req, res);
 
   const note = await NoteModel.findById(id)
     .populate({ path: 'tags', model: TagModel })

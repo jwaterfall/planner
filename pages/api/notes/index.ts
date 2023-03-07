@@ -3,18 +3,18 @@ import { NextApiRequest, NextApiResponse } from 'next';
 
 import connectToDatabase from '../../../middleware/connectToDatabase';
 import NoteModel from '../../../models/note';
-import ProjectModel from '../../../models/project';
 import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { user } = getSession(req, res);
+  const { user } = await getSession(req, res);
 
   switch (req.method) {
     case 'GET':
       try {
-        const notes = await NoteModel.find({ author: user.sub, project: req.query.projectId })
-          .populate({ path: 'tags', model: TagModel })
-          .populate({ path: 'project', model: ProjectModel });
+        const notes = await NoteModel.find({
+          author: user.sub,
+          project: req.query.projectId,
+        }).populate({ path: 'tags', model: TagModel });
 
         res.json(notes);
       } catch (err) {

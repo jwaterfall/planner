@@ -10,42 +10,24 @@ import {
   HiOutlineTrash,
 } from 'react-icons/hi';
 
-import useProjects from '../../../hooks/queries/useProjects';
 import useTags from '../../../hooks/queries/useTags';
 import useToggle from '../../../hooks/useToggle';
 import NavLink from '../../elements/NavLink';
-import AddProjectModal from '../AddProjectModal';
 import AddTagModal from '../AddTagModal';
 import ProjectNavItem from './ProjectNavItem';
 import TagNavItem from './TagNavItem';
-import {
-  AddNew,
-  CollapsibleMenu,
-  Container,
-  Margin,
-  NavItem,
-  Section,
-} from './styles';
+import { AddNew, CollapsibleMenu, Container, Margin, NavItem, Section } from './styles';
 
 const Sidebar: FC = () => {
   const [tagModalVisibility, setTagModalVisibility] = useState(false);
-  const [projectModalVisibility, setProjectModalVisibility] = useState(false);
   const [tagsVisibility, toggleTagsVisibility] = useToggle(true);
   const [projectsVisibility, toggleProjectsVisibility] = useToggle(true);
 
   const { data: tags } = useTags();
-  const { data: projects } = useProjects();
 
   return (
     <>
-      <AddTagModal
-        show={tagModalVisibility}
-        onHide={() => setTagModalVisibility(false)}
-      />
-      <AddProjectModal
-        show={projectModalVisibility}
-        onHide={() => setProjectModalVisibility(false)}
-      />
+      <AddTagModal show={tagModalVisibility} onHide={() => setTagModalVisibility(false)} />
       <Container>
         <Section>
           <NavLink href="/">
@@ -68,10 +50,7 @@ const Sidebar: FC = () => {
           </NavLink>
         </Section>
         <Section>
-          <CollapsibleMenu
-            onClick={toggleTagsVisibility}
-            isOpened={tagsVisibility}
-          >
+          <CollapsibleMenu onClick={toggleTagsVisibility} isOpened={tagsVisibility}>
             <HiOutlineTag />
             Tags
             <HiOutlineChevronLeft />
@@ -81,34 +60,7 @@ const Sidebar: FC = () => {
               {tags?.map((tag) => (
                 <TagNavItem key={tag._id} tag={tag} />
               ))}
-              <AddNew
-                onClick={() => setTagModalVisibility(true)}
-                data-testid="AddTagButton"
-              >
-                <HiOutlinePlusCircle />
-                Add New
-              </AddNew>
-            </Margin>
-          </Collapse>
-        </Section>
-        <Section>
-          <CollapsibleMenu
-            onClick={toggleProjectsVisibility}
-            isOpened={projectsVisibility}
-          >
-            <HiOutlineFolder />
-            Projects
-            <HiOutlineChevronLeft />
-          </CollapsibleMenu>
-          <Collapse isOpened={projectsVisibility}>
-            <Margin>
-              {projects?.map((project) => (
-                <ProjectNavItem key={project._id} project={project} />
-              ))}
-              <AddNew
-                onClick={() => setProjectModalVisibility(true)}
-                data-testid="AddProjectButton"
-              >
+              <AddNew onClick={() => setTagModalVisibility(true)} data-testid="AddTagButton">
                 <HiOutlinePlusCircle />
                 Add New
               </AddNew>

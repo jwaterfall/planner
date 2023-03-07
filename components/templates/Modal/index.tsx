@@ -1,4 +1,4 @@
-import { FC, useRef } from 'react';
+import { FC, PropsWithChildren, useRef } from 'react';
 
 import useOnClickOutside from '../../../hooks/useOnClickOutside';
 import ColorPicker from './ColorPicker';
@@ -15,7 +15,7 @@ export interface IModalProps {
   onHide: () => void;
 }
 
-const Modal: FC<IModalProps> = ({ show, onHide, children, ...props }) => {
+const Modal: FC<PropsWithChildren<IModalProps>> = ({ show, onHide, children, ...props }) => {
   const ref = useRef();
   useOnClickOutside(ref, onHide);
 

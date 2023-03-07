@@ -1,9 +1,9 @@
-import React, { FC } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 
 import Sidebar from '../../modules/Sidebar';
 import { Container, Page } from './styles';
 
-const Layout: FC = ({ children }) => (
+const Layout: FC<PropsWithChildren> = ({ children }) => (
   <Container>
     <Sidebar />
     <Page>{children}</Page>

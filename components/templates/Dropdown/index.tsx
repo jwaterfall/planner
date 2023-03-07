@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from 'react';
+import { FC, useRef, useState, PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 import { usePopper } from 'react-popper';
 
@@ -13,7 +13,7 @@ export interface IDropdownMenuProps {
   onHide: () => void;
 }
 
-export const DropdownMenu: FC<IDropdownMenuProps> = ({
+export const DropdownMenu: FC<PropsWithChildren<IDropdownMenuProps>> = ({
   referenceElement,
   show,
   onHide,

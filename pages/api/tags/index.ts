@@ -5,7 +5,7 @@ import connectToDatabase from '../../../middleware/connectToDatabase';
 import TagModel from '../../../models/tag';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { user } = getSession(req, res);
+  const { user } = await getSession(req, res);
 
   switch (req.method) {
     case 'GET':
